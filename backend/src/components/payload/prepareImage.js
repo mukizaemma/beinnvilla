@@ -83,6 +83,12 @@ export async function prepareUploadFile(file) {
   }
 }
 
+export function chosenFiles(event) {
+  const files = Array.from(event.target.files || [])
+  event.target.value = ''
+  return files
+}
+
 export async function prepareUploadFiles(fileList) {
   return Promise.all(Array.from(fileList || []).map((file) => prepareUploadFile(file)))
 }

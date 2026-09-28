@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { FieldLabel, useField, useListDrawer } from '@payloadcms/ui'
-import { prepareUploadFiles, uploadPreparedFile } from '../prepareImage.js'
+import { chosenFiles, prepareUploadFile, uploadPreparedFile } from '../prepareImage.js'
 import './mediaGridField.css'
 
 function mediaId(value) {
@@ -64,20 +64,39 @@ export function MediaGridField({ field, path, readOnly }) {
     uploadJob({ ...job, status: 'uploading' })
   }
 
-  async function pickFiles(event) {
-    const files = event.target.files
-    event.target.value = ''
-    if (!files?.length || readOnly) return
-    const room = Math.max(0, max - rows.length - jobs.length)
-    if (!room) return
+  async function prepareAndUpload(job) {
+    let ready = job
     try {
-      const prepared = await prepareUploadFiles(Array.from(files).slice(0, room))
-      const nextJobs = prepared.map((item) => ({ ...item, id: crypto.randomUUID(), status: 'uploading' }))
-      setJobs((current) => [...current, ...nextJobs])
-      nextJobs.forEach((job) => uploadJob(job))
+      const prepared = await prepareUploadFile(job.file)
+      if (!jobsRef.current.some((item) => item.id === job.id)) {
+        URL.revokeObjectURL(prepared.preview)
+        if (prepared.preview !== job.preview) URL.revokeObjectURL(job.preview)
+        return
+      }
+      if (prepared.preview !== job.preview) URL.revokeObjectURL(job.preview)
+      ready = { ...job, file: prepared.file, preview: prepared.preview, status: 'uploading' }
+      setJobs((current) => current.map((item) => (item.id === job.id ? ready : item)))
     } catch {
-      window.alert('Could not prepare these images.')
+      window.alert('Could not prepare one image. The original will be uploaded.')
     }
+    uploadJob(ready)
+  }
+
+  function pickFiles(event) {
+    const selected = chosenFiles(event)
+    if (!selected.length || readOnly) return
+    const room = Math.max(0, max - rows.length - jobsRef.current.length)
+    if (!room) return
+    const nextJobs = selected.slice(0, room).map((file) => ({
+      id: crypto.randomUUID(),
+      file,
+      preview: URL.createObjectURL(file),
+      status: 'uploading',
+    }))
+    const next = [...jobsRef.current, ...nextJobs]
+    jobsRef.current = next
+    setJobs(next)
+    nextJobs.forEach((job) => prepareAndUpload(job))
   }
 
   function removeJob(job) {

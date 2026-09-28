@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { FieldLabel, useField, useListDrawer } from '@payloadcms/ui'
-import { formatBytes, prepareUploadFile, uploadPreparedFile } from '../prepareImage.js'
+import { chosenFiles, formatBytes, prepareUploadFile, uploadPreparedFile } from '../prepareImage.js'
 import './heroImageField.css'
 
 function mediaId(value) {
@@ -53,8 +53,7 @@ export function HeroImageField({ field, path, readOnly }) {
   }, [id, value])
 
   async function onFile(event) {
-    const file = event.target.files?.[0]
-    event.target.value = ''
+    const [file] = chosenFiles(event)
     if (!file) return
     setBusy(true)
     try {

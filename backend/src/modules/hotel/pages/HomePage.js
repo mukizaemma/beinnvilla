@@ -94,7 +94,7 @@ export const HomePage = {
         },
         {
           label: 'Gallery',
-          description: 'Five photographs on the home page. The first is the tall picture on the left.',
+          description: 'The photo grid on the home page only. The Gallery page is a separate list.',
           fields: [
             {
               name: 'homeGallery',
@@ -102,7 +102,26 @@ export const HomePage = {
               maxRows: 5,
               labels: { singular: 'Photo', plural: 'Photos' },
               admin: {
-                description: 'Choose up to five pictures. Upload a new file or pick one from the library.',
+                description: 'Up to five pictures. The first is the tall photo on the left. Room photos and the Gallery page are not used here.',
+                components: {
+                  Field: './src/components/payload/MediaGridField/index.jsx#MediaGridField',
+                },
+              },
+              fields: [previewUpload('photo', { required: true, admin: { width: '50%' } })],
+            },
+          ],
+        },
+        {
+          label: 'Under the house',
+          description: 'The large photos under “Twenty couples, or twenty singles.” Separate from the grid above.',
+          fields: [
+            {
+              name: 'homeLower',
+              type: 'array',
+              maxRows: 4,
+              labels: { singular: 'Photo', plural: 'Photos' },
+              admin: {
+                description: 'Up to four pictures. These are not the home grid, the hero slides, or the Gallery page.',
                 components: {
                   Field: './src/components/payload/MediaGridField/index.jsx#MediaGridField',
                 },
