@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { FieldLabel, useField, useListDrawer } from '@payloadcms/ui'
-import { formatBytes, prepareUploadFiles, uploadPreparedFile } from '../prepareImage.js'
+import { prepareUploadFiles, uploadPreparedFile } from '../prepareImage.js'
 import './mediaGridField.css'
 
 function mediaId(value) {
@@ -26,115 +26,129 @@ export function MediaGridField({ field, path, readOnly }) {
   const key = useMemo(() => imageKey(field), [field])
   const rows = Array.isArray(value) ? value : []
   const max = field?.maxRows || 24
-  const [queue, setQueue] = useState([])
-  const [busy, setBusy] = useState(false)
+  const [jobs, setJobs] = useState([])
+  const [known, setKnown] = useState({})
+  const rowsRef = useRef(rows)
+  const jobsRef = useRef(jobs)
+  rowsRef.current = rows
+  jobsRef.current = jobs
+  const uploading = jobs.filter((job) => job.status === 'uploading').length
+  const failed = jobs.filter((job) => job.status === 'failed').length
   const [ListDrawer, , { openDrawer, closeDrawer }] = useListDrawer({
     collectionSlugs: ['media'],
     uploads: true,
   })
 
+  useEffect(() => {
+    return () => jobsRef.current.forEach((job) => URL.revokeObjectURL(job.preview))
+  }, [])
+
+  async function uploadJob(job) {
+    try {
+      const doc = await uploadPreparedFile(job.file)
+      if (!jobsRef.current.some((item) => item.id === job.id)) return
+      const id = mediaId(doc)
+      setKnown((current) => ({ ...current, [id]: doc }))
+      const next = [...rowsRef.current, { [key]: id }].slice(0, max)
+      rowsRef.current = next
+      setValue(next)
+      URL.revokeObjectURL(job.preview)
+      setJobs((current) => current.filter((item) => item.id !== job.id))
+    } catch {
+      setJobs((current) => current.map((item) => (item.id === job.id ? { ...item, status: 'failed' } : item)))
+    }
+  }
+
+  function retryJob(job) {
+    setJobs((current) => current.map((item) => (item.id === job.id ? { ...item, status: 'uploading' } : item)))
+    uploadJob({ ...job, status: 'uploading' })
+  }
+
   async function pickFiles(event) {
     const files = event.target.files
     event.target.value = ''
-    if (!files?.length) return
-    const room = Math.max(0, max - rows.length)
+    if (!files?.length || readOnly) return
+    const room = Math.max(0, max - rows.length - jobs.length)
     if (!room) return
-    setBusy(true)
     try {
-      setQueue(await prepareUploadFiles(Array.from(files).slice(0, room)))
+      const prepared = await prepareUploadFiles(Array.from(files).slice(0, room))
+      const nextJobs = prepared.map((item) => ({ ...item, id: crypto.randomUUID(), status: 'uploading' }))
+      setJobs((current) => [...current, ...nextJobs])
+      nextJobs.forEach((job) => uploadJob(job))
     } catch {
       window.alert('Could not prepare these images.')
-    } finally {
-      setBusy(false)
     }
   }
 
-  async function uploadQueue() {
-    if (!queue.length) return
-    setBusy(true)
-    try {
-      const uploaded = []
-      for (const item of queue) {
-        const doc = await uploadPreparedFile(item.file)
-        uploaded.push({ [key]: doc.id || doc })
-      }
-      setValue([...rows, ...uploaded].slice(0, max))
-      queue.forEach((item) => URL.revokeObjectURL(item.preview))
-      setQueue([])
-    } catch {
-      window.alert('Upload failed.')
-    } finally {
-      setBusy(false)
-    }
+  function removeJob(job) {
+    URL.revokeObjectURL(job.preview)
+    setJobs((current) => current.filter((item) => item.id !== job.id))
   }
 
   function removeAt(index) {
-    setValue(rows.filter((_, i) => i !== index))
+    setValue(rows.filter((_, itemIndex) => itemIndex !== index))
   }
+
+  const status = uploading
+    ? `Uploading ${uploading} photo${uploading === 1 ? '' : 's'}. Wait before saving — they are not stored yet.`
+    : failed
+      ? `${failed} photo${failed === 1 ? '' : 's'} did not upload and will not be saved. Remove or try again.`
+      : rows.length
+        ? `${rows.length} photo${rows.length === 1 ? '' : 's'} uploaded. You can continue.`
+        : 'No gallery photos yet.'
 
   return (
     <div className="media-grid-field">
       <FieldLabel label={field?.label || field?.labels?.plural || 'Photos'} path={path} />
       <p className="media-grid-field__hint">
-        Add several photos at once. Files over 700KB are resized before upload.
+        Choose several photos at once. Each one shows here as soon as it is chosen.
+      </p>
+      <p className={uploading || failed ? 'media-grid-field__status media-grid-field__status--wait' : 'media-grid-field__status'} role="status">
+        {status}
       </p>
 
       <div className="media-grid-field__grid">
         {rows.map((row, index) => {
-          const doc = typeof row?.[key] === 'object' ? row[key] : null
+          const id = mediaId(row?.[key])
+          const doc = typeof row?.[key] === 'object' ? row[key] : known[id]
           const src = mediaSrc(doc)
           return (
-            <article key={mediaId(row?.[key]) || index}>
+            <article key={id || index} className="media-grid-field__tile">
               {src ? <img src={src} alt="" /> : <div className="media-grid-field__empty">Photo {index + 1}</div>}
               {!readOnly && (
-                <button type="button" onClick={() => removeAt(index)}>
-                  Remove
+                <button type="button" className="media-grid-field__remove" onClick={() => removeAt(index)} aria-label="Remove photo">
+                  ×
                 </button>
               )}
+              <small>Uploaded</small>
             </article>
           )
         })}
+        {jobs.map((job) => (
+          <article key={job.id} className="media-grid-field__tile">
+            <img src={job.preview} alt={job.file.name} />
+            <button type="button" className="media-grid-field__remove" onClick={() => removeJob(job)} aria-label="Remove photo">
+              ×
+            </button>
+            <small className={job.status === 'failed' ? 'media-grid-field__failed' : undefined}>
+              {job.status === 'uploading' ? 'Uploading…' : 'Not uploaded'}
+            </small>
+            {job.status === 'failed' ? (
+              <button type="button" className="media-grid-field__retry" onClick={() => retryJob(job)}>
+                Try again
+              </button>
+            ) : null}
+          </article>
+        ))}
       </div>
 
-      {queue.length > 0 && (
-        <div className="media-grid-field__queue">
-          <strong>Ready to upload ({queue.length})</strong>
-          <div className="media-grid-field__grid">
-            {queue.map((item, index) => (
-              <article key={`${item.file.name}-${index}`}>
-                <img src={item.preview} alt={item.file.name} />
-                <small>
-                  {item.resized
-                    ? `${formatBytes(item.originalSize)} → ${formatBytes(item.finalSize)} resized`
-                    : `${formatBytes(item.finalSize)} kept as-is`}
-                </small>
-              </article>
-            ))}
-          </div>
-          <div className="media-grid-field__actions">
-            <button type="button" onClick={uploadQueue} disabled={busy}>
-              {busy ? 'Uploading…' : `Upload ${queue.length}`}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                queue.forEach((item) => URL.revokeObjectURL(item.preview))
-                setQueue([])
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {!readOnly && rows.length < max && queue.length === 0 && (
+      {!readOnly && rows.length + jobs.length < max && (
         <div className="media-grid-field__actions">
           <label>
             Add images
-            <input type="file" accept="image/*" multiple hidden disabled={busy} onChange={pickFiles} />
+            <input type="file" accept="image/*" multiple hidden onChange={pickFiles} />
           </label>
-          <button type="button" onClick={openDrawer} disabled={busy}>
+          <button type="button" onClick={openDrawer}>
             From library
           </button>
         </div>
@@ -146,6 +160,7 @@ export function MediaGridField({ field, path, readOnly }) {
           const id = mediaId(doc)
           if (!id || rows.length >= max) return
           if (rows.some((row) => mediaId(row?.[key]) === id)) return
+          if (typeof doc === 'object') setKnown((current) => ({ ...current, [id]: doc }))
           setValue([...rows, { [key]: id }])
           closeDrawer()
         }}

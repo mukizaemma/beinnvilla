@@ -12,4 +12,11 @@ export const FEATURE_LIBRARY = {
   'hot-water': 'Hot water',
   'private-bar': 'Private in-house bar',
   boat: 'Boat ride for in-house guests',
+  jacuzzi: 'Jacuzzi',
+  'sauna-chair': 'Sauna chair',
+  'city-view': 'City view',
+}
+
+export function featureLabel(id) {
+  return FEATURE_LIBRARY[id] || String(id || '')
 }

@@ -16,7 +16,7 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react';
-import { FEATURE_LIBRARY } from '@features/hotel/rooms/featureLibrary';
+import { featureLabel } from '@features/hotel/rooms/featureLibrary';
 import { useSiteLayout } from '@lib/queries/useSiteLayout';
 import RichText from '@components/ui/RichText';
 import { useCart } from '@lib/cart/CartContext';
@@ -78,12 +78,12 @@ export default function RoomInfo({ room }) {
 
         <h2 className={styles.sectionTitle}>Room Features</h2>
         <ul className={styles.features}>
-          {room.features.map((id) => {
+          {(room.features || []).map((id) => {
             const Icon = FEATURE_ICONS[id];
             return (
               <li key={id} className={styles.featureItem}>
-                <Icon size={16} className={styles.featureIcon} />
-                <span>{FEATURE_LIBRARY[id]}</span>
+                {Icon ? <Icon size={16} className={styles.featureIcon} /> : null}
+                <span>{featureLabel(id)}</span>
               </li>
             );
           })}

@@ -5,10 +5,26 @@ import { mediaUrl } from '@features/hotel/adapters'
 import { asHtml, htmlToLexical, isBlankHtml } from '@lib/richText'
 import { staffClient, mediaId } from '../api/staffClient'
 import { slugify } from '../lib/slugify'
+import MediaField from '../components/MediaField'
 import MediaGalleryField from '../components/MediaGalleryField'
 import StaffModal from '../components/StaffModal'
 import SummernoteField from '../components/SummernoteField'
 import '../staff.css'
+
+function picture(field) {
+  if (!field) return ''
+  if (typeof field === 'string') {
+    return field.startsWith('http') || field.startsWith('/') ? mediaUrl(field) : ''
+  }
+  return mediaUrl(field)
+}
+
+function CoverThumb({ row }) {
+  const [failed, setFailed] = useState(false)
+  const src = picture(row.image) || picture(row.gallery?.[0]?.photo)
+  if (!src || failed) return <span className="staffThumbEmpty">No cover</span>
+  return <img src={src} alt={`${row.name || 'Room'} cover`} className="staffThumb" onError={() => setFailed(true)} />
+}
 
 const empty = {
   name: '',
@@ -18,14 +34,16 @@ const empty = {
   monthlyRate: 2500,
   units: 1,
   description: '',
-  specs: { size: '', bed: '', occupancy: '', view: '', smoking: '', breakfast: '' },
+  specs: { size: '', bedrooms: 1, bed: '', occupancy: '', view: '', smoking: '', breakfast: '' },
   features: [],
+  customFeatures: [],
+  image: null,
   gallery: [],
 }
 
 const SPEC_FIELDS = [
-  { key: 'size', label: 'Size', hint: 'Whole apartment' },
-  { key: 'bed', label: 'Bedrooms', hint: '6 bedrooms' },
+  { key: 'size', label: 'Size', hint: '32 m²' },
+  { key: 'bed', label: 'Bed type', hint: 'King, or two singles' },
   { key: 'occupancy', label: 'Group size', hint: 'One group / the villa' },
   { key: 'view', label: 'View', hint: 'Lake Kivu' },
   { key: 'smoking', label: 'Smoking', hint: 'No' },
@@ -35,6 +53,8 @@ const SPEC_FIELDS = [
 export default function StaffRooms() {
   const [rows, setRows] = useState([])
   const [form, setForm] = useState(null)
+  const [extraAmenity, setExtraAmenity] = useState('')
+  const [galleryPending, setGalleryPending] = useState(false)
 
   async function load() {
     const { data } = await staffClient.get('/api/rooms?limit=100&depth=1')
@@ -46,7 +66,17 @@ export default function StaffRooms() {
   }, [])
 
   function openCreate() {
-    setForm({ ...empty, specs: { ...empty.specs } })
+    setExtraAmenity('')
+    setGalleryPending(false)
+    setForm({ ...empty, specs: { ...empty.specs }, features: [], customFeatures: [] })
+  }
+
+  function addAmenity() {
+    const label = extraAmenity.trim()
+    if (!label) return
+    const known = form.customFeatures.some((item) => item.toLowerCase() === label.toLowerCase())
+    if (!known) setForm({ ...form, customFeatures: [...form.customFeatures, label] })
+    setExtraAmenity('')
   }
 
   function openEdit(row) {
@@ -59,23 +89,35 @@ export default function StaffRooms() {
       monthlyRate: row.monthlyRate || '',
       units: row.units || 1,
       description: asHtml(row.description),
-      specs: { ...empty.specs, ...row.specs },
+      specs: {
+        ...empty.specs,
+        ...row.specs,
+        bedrooms: row.specs?.bedrooms == null || row.specs?.bedrooms === '' ? 1 : row.specs.bedrooms,
+      },
       features: row.features || [],
-      gallery: (row.gallery || []).map((item) => item.photo).filter(Boolean).length
-        ? (row.gallery || []).map((item) => item.photo).filter(Boolean)
-        : row.image
-          ? [row.image]
-          : [],
+      customFeatures: (row.customFeatures || []).map((item) => item.label).filter(Boolean),
+      image: row.image || null,
+      gallery: (row.gallery || []).map((item) => item.photo).filter(Boolean),
     })
+    setExtraAmenity('')
   }
 
   async function save(event) {
     event.preventDefault()
+    if (galleryPending) {
+      toast.error('Wait until the gallery photos finish uploading.')
+      return
+    }
     if (isBlankHtml(form.description)) {
       toast.error('Add a short description of the apartment.')
       return
     }
     const gallery = (form.gallery || []).map((item) => mediaId(item)).filter(Boolean)
+    const cover = mediaId(form.image)
+    const bedrooms =
+      form.specs.bedrooms === '' || form.specs.bedrooms == null || Number.isNaN(Number(form.specs.bedrooms))
+        ? 1
+        : Number(form.specs.bedrooms)
     const payload = {
       name: form.name,
       slug: form.slug || slugify(form.name),
@@ -84,15 +126,16 @@ export default function StaffRooms() {
       monthlyRate: form.monthlyRate === '' ? undefined : Number(form.monthlyRate),
       units: Math.max(1, Number(form.units) || 1),
       description: htmlToLexical(form.description),
-      specs: form.specs,
+      specs: { ...form.specs, bedrooms },
       features: form.features,
-      image: gallery[0] || undefined,
+      customFeatures: form.customFeatures.map((label) => ({ label })),
+      image: cover || gallery[0] || undefined,
       gallery: gallery.map((photo) => ({ photo })),
     }
     try {
       if (form.id) await staffClient.patch(`/api/rooms/${form.id}`, payload)
       else await staffClient.post('/api/rooms', payload)
-      toast.success('Apartment saved.')
+      toast.success('Room saved.')
       setForm(null)
       load()
     } catch (err) {
@@ -101,7 +144,7 @@ export default function StaffRooms() {
   }
 
   async function remove(id) {
-    if (!window.confirm('Delete this apartment listing?')) return
+    if (!window.confirm('Delete this room?')) return
     try {
       await staffClient.delete(`/api/rooms/${id}`)
       toast.success('Listing deleted.')
@@ -115,8 +158,8 @@ export default function StaffRooms() {
     <div className="staffPage">
       <h1>Rooms</h1>
       <p className="staffLead">
-        Keep a single listing for the whole villa. Guests book the building, not individual
-        bedrooms. Nightly rates: without breakfast, with breakfast, and a monthly rate.
+        Each room or apartment has its own cover photo, gallery, amenities, and bedroom count.
+        Nightly rates: without breakfast, with breakfast, and a monthly rate.
       </p>
       <div className="staffToolbar">
         <button type="button" className="staffBtn" onClick={openCreate}>
@@ -127,7 +170,7 @@ export default function StaffRooms() {
         <table className="staffTable">
           <thead>
             <tr>
-              <th></th>
+              <th>Cover</th>
               <th>Name</th>
               <th>Price / night</th>
               <th>With breakfast</th>
@@ -139,11 +182,7 @@ export default function StaffRooms() {
             {rows.map((row) => (
               <tr key={row.id}>
                 <td>
-                  {mediaUrl(row.image) ? (
-                    <img src={mediaUrl(row.image)} alt="" className="staffThumb" />
-                  ) : (
-                    <span className="staffThumbEmpty" />
-                  )}
+                  <CoverThumb row={row} />
                 </td>
                 <td>{row.name}</td>
                 <td>${row.pricePerNight}</td>
@@ -166,7 +205,7 @@ export default function StaffRooms() {
       </div>
 
       {form && (
-        <StaffModal title={form.id ? 'Edit apartment' : 'Add apartment'} wide onClose={() => setForm(null)}>
+        <StaffModal title={form.id ? 'Edit room' : 'Add room'} wide onClose={() => setForm(null)}>
           <form onSubmit={save} className="formGrid">
             <label className="staffField col-3">
               Name
@@ -204,13 +243,29 @@ export default function StaffRooms() {
               value={form.description}
               onChange={(description) => setForm((current) => ({ ...current, description }))}
             />
-            <MediaGalleryField
-              label="Apartment photos"
-              hint="These photos also appear on the homepage (latest 4) and the Gallery page."
-              values={form.gallery}
-              onChange={(gallery) => setForm({ ...form, gallery })}
-              max={12}
+            <MediaField
+              label="Cover image"
+              value={form.image}
+              onChange={(image) => setForm({ ...form, image })}
             />
+            <MediaGalleryField
+              label="Room gallery"
+              hint="Choose several photos at once. Each one shows here as soon as it is chosen."
+              values={form.gallery}
+              onChange={(gallery) => setForm((current) => (current ? { ...current, gallery } : current))}
+              onPendingChange={setGalleryPending}
+              max={24}
+            />
+            <label className="staffField col-3">
+              Bedrooms
+              <input
+                type="number"
+                min="0"
+                placeholder="1"
+                value={form.specs.bedrooms}
+                onChange={(e) => setForm({ ...form, specs: { ...form.specs, bedrooms: e.target.value } })}
+              />
+            </label>
             {SPEC_FIELDS.map(({ key, label, hint }) => (
               <label key={key} className="staffField col-3">
                 {label}
@@ -240,13 +295,47 @@ export default function StaffRooms() {
                   </label>
                 ))}
               </div>
+              <div className="featureExtras">
+                {form.customFeatures.map((label) => (
+                  <span key={label}>
+                    {label}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          customFeatures: form.customFeatures.filter((item) => item !== label),
+                        })
+                      }
+                    >
+                      Remove
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <div className="featureAdd">
+                <input
+                  value={extraAmenity}
+                  placeholder="Add another amenity"
+                  onChange={(e) => setExtraAmenity(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      addAmenity()
+                    }
+                  }}
+                />
+                <button type="button" className="staffBtn" onClick={addAmenity}>
+                  Add
+                </button>
+              </div>
             </div>
             <div className="formActions full">
               <button type="button" className="staffBtn staffBtnGhost" onClick={() => setForm(null)}>
                 Cancel
               </button>
-              <button type="submit" className="staffBtn">
-                Save
+              <button type="submit" className="staffBtn" disabled={galleryPending}>
+                {galleryPending ? 'Wait for photos' : 'Save'}
               </button>
             </div>
           </form>

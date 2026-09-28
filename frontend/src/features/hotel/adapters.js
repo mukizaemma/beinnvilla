@@ -38,7 +38,10 @@ export function adaptRoom(doc) {
     description: asPlain(doc.description),
     descriptionHtml: doc.description,
     specs: doc.specs || {},
-    features: doc.features || [],
+    features: [
+      ...(doc.features || []),
+      ...(doc.customFeatures || []).map((item) => item?.label).filter(Boolean),
+    ],
     image: mediaUrl(doc.image),
     gallery: (doc.gallery || []).map((g) => mediaUrl(g.photo)).filter(Boolean),
     galleryItems: (doc.gallery || [])

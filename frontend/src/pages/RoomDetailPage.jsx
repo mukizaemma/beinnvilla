@@ -19,10 +19,12 @@ import {
   Droplets,
   Wine,
   Ship,
+  Armchair,
+  Building2,
 } from 'lucide-react'
 import { useRoomsPage } from '@lib/queries/useRoomsPage'
 import { isLegacyName } from '@features/hotel/brand'
-import { FEATURE_LIBRARY } from '@features/hotel/rooms/featureLibrary'
+import { featureLabel } from '@features/hotel/rooms/featureLibrary'
 import { APARTMENT } from '@features/hotel/lakeStay'
 import PageLoader from '@components/ui/PageLoader'
 import ScreenHeader from '@components/ui/ScreenHeader'
@@ -34,6 +36,7 @@ import styles from './RoomDetailPage.module.css'
 
 const SPEC_META = [
   { key: 'size', Icon: Ruler },
+  { key: 'bedrooms', Icon: BedDouble },
   { key: 'bed', Icon: BedDouble },
   { key: 'occupancy', Icon: Users },
   { key: 'view', Icon: Mountain },
@@ -55,12 +58,19 @@ const FEATURE_ICONS = {
   'hot-water': Droplets,
   'private-bar': Wine,
   boat: Ship,
+  jacuzzi: Bath,
+  'sauna-chair': Armchair,
+  'city-view': Building2,
 }
 
 function specLabel(key, value) {
   if (key === 'occupancy' && /^\d+$/.test(String(value).trim())) {
     const count = Number(value)
     return `${count} guest${count === 1 ? '' : 's'}`
+  }
+  if (key === 'bedrooms' && Number(value) > 0) {
+    const count = Number(value)
+    return `${count} bedroom${count === 1 ? '' : 's'}`
   }
   return value
 }
@@ -140,7 +150,7 @@ export default function RoomDetailPage() {
                     return (
                       <li key={id}>
                         {Icon ? <Icon size={16} /> : null}
-                        <span>{FEATURE_LIBRARY[id] || id}</span>
+                        <span>{featureLabel(id)}</span>
                       </li>
                     )
                   })}

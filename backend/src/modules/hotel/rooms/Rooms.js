@@ -4,8 +4,8 @@ import { previewUpload } from '../../../core/fields/pageHero.js'
 export const Rooms = {
   slug: 'rooms',
   labels: {
-    singular: 'Apartment',
-    plural: 'Apartment',
+    singular: 'Room',
+    plural: 'Rooms',
   },
   access: {
     read: () => true,
@@ -14,7 +14,7 @@ export const Rooms = {
     group: false,
     useAsTitle: 'name',
     defaultColumns: ['image', 'name', 'pricePerNight', 'priceWithBreakfast', 'monthlyRate'],
-    description: 'The whole villa guests book. Keep a single listing — this is not a hotel of room types.',
+    description: 'Each room or apartment. Set a cover photo, then add as many gallery photos as you need.',
   },
   hooks: {
     beforeValidate: [applyAutoSlug],
@@ -24,6 +24,9 @@ export const Rooms = {
           const photo = typeof data.image === 'object' ? data.image.id : data.image
           if (photo) data.gallery = [{ photo }]
         }
+        if (!data.specs || typeof data.specs !== 'object') data.specs = {}
+        const bedrooms = data.specs.bedrooms
+        if (bedrooms === '' || bedrooms == null || Number.isNaN(Number(bedrooms))) data.specs.bedrooms = 1
         return data
       },
     ],
@@ -115,9 +118,20 @@ export const Rooms = {
     {
       name: 'specs',
       type: 'group',
+      admin: { description: 'Optional. Bedroom count is stored as 1 when left empty.' },
       fields: [
         { name: 'size', type: 'text', admin: { width: '25%' } },
-        { name: 'bed', type: 'text', admin: { width: '25%' } },
+        {
+          name: 'bedrooms',
+          type: 'number',
+          min: 0,
+          defaultValue: 1,
+          admin: {
+            width: '25%',
+            description: 'Optional. Saved as 1 if you leave this empty.',
+          },
+        },
+        { name: 'bed', type: 'text', label: 'Bed type', admin: { width: '25%' } },
         { name: 'occupancy', type: 'text', admin: { width: '25%' } },
         { name: 'view', type: 'text', admin: { width: '25%' } },
         { name: 'smoking', type: 'text', admin: { width: '25%' } },
@@ -143,15 +157,31 @@ export const Rooms = {
         { label: 'Hot water', value: 'hot-water' },
         { label: 'Private in-house bar', value: 'private-bar' },
         { label: 'Boat ride for in-house guests', value: 'boat' },
+        { label: 'Jacuzzi', value: 'jacuzzi' },
+        { label: 'Sauna chair', value: 'sauna-chair' },
+        { label: 'City view', value: 'city-view' },
       ],
     },
-    previewUpload('image', { admin: { width: '25%' } }),
+    {
+      name: 'customFeatures',
+      type: 'array',
+      labels: { singular: 'Amenity', plural: 'Other amenities' },
+      admin: {
+        description: 'Add any amenity that is not in the list above.',
+      },
+      fields: [{ name: 'label', type: 'text', required: true }],
+    },
+    previewUpload('image', {
+      label: 'Cover image',
+      admin: { width: '50%', description: 'The main photo for this room.' },
+    }),
     {
       name: 'gallery',
       type: 'array',
+      label: 'Room gallery',
       admin: {
         width: '100%',
-        description: 'Photos of the apartment. New images are also added to the website gallery (homepage shows the latest 4). Files over 700KB are resized first.',
+        description: 'Extra photos. Choose several images at once. Files over 700KB are resized first.',
         components: {
           Field: './src/components/payload/MediaGridField/index.jsx#MediaGridField',
         },
