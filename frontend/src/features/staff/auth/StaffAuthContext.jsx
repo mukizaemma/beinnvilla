@@ -31,7 +31,7 @@ export function StaffAuthProvider({ children }) {
         const { data } = await staffClient.post('/api/users/login', { email, password })
         if (data.user?.status === 'inactive') {
           setStaffToken('')
-          throw new Error('This account is inactive.')
+          throw new Error('This account is waiting for approval. It cannot open the admin pages yet.')
         }
         setStaffToken(data.token)
         setUser(data.user)

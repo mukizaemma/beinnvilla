@@ -223,12 +223,36 @@
   display: block;
 }
 
-.photoTile small {
+.tileBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.4rem 0.55rem 0.5rem;
+}
+
+.photoTile small,
+.tileBar small {
   display: block;
   padding: 0.4rem 0.55rem 0.5rem;
   color: #1f6b3a;
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+.tileBar small {
+  padding: 0;
+}
+
+.replace {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #1a2b4b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .removeIcon {

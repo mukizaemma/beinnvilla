@@ -168,6 +168,9 @@ function readPage(slug, page) {
         image: page.location?.image || '',
       },
       gallery: (page.homeGallery || []).map((item) => item.photo).filter(Boolean),
+      lower: (page.homeLower || []).some((item) => item.photo)
+        ? (page.homeLower || []).map((item) => item.photo).filter(Boolean)
+        : (page.stats || []).map((item) => item.image).filter(Boolean),
       banner: {
         eyebrow: page.cta?.eyebrow || '',
         headline: page.cta?.headline || '',
@@ -281,6 +284,16 @@ function writePage(slug, current, form) {
         .filter(Boolean)
         .slice(0, 5)
         .map((photo) => ({ photo })),
+      homeLower: (form.lower || [])
+        .map((photo) => mediaId(photo))
+        .filter(Boolean)
+        .slice(0, 4)
+        .map((photo) => ({ photo })),
+      stats: (form.lower || [])
+        .map((photo) => mediaId(photo))
+        .filter(Boolean)
+        .slice(0, 4)
+        .map((image) => ({ image })),
       cta: {
         ...(current.cta || {}),
         eyebrow: form.banner.eyebrow,
@@ -349,6 +362,8 @@ const ALL_PAGES = [HOME, ...PAGES]
 
 export default function StaffPages() {
   const [form, setForm] = useState(null)
+  const [gridPending, setGridPending] = useState(false)
+  const [lowerPending, setLowerPending] = useState(false)
   const [params] = useSearchParams()
 
   useEffect(() => {
@@ -361,6 +376,8 @@ export default function StaffPages() {
   async function open(page) {
     try {
       const { data } = await staffClient.get(`/api/globals/${page.slug}?depth=1`)
+      setGridPending(false)
+      setLowerPending(false)
       setForm({ ...page, raw: data, ...readPage(page.slug, data) })
     } catch {
       toast.error('Could not load this page.')
@@ -447,11 +464,20 @@ export default function StaffPages() {
                   <strong>Home gallery</strong>
                   <p className="staffLead">Five photographs. The first is the tall picture on the left.</p>
                   <MediaGalleryField
-                    label="Home gallery"
-                    hint="Upload new pictures or choose from the library. Five is the limit."
+                    label="Home grid"
+                    hint="These five photos appear only in the grid above the house card. The first is the tall picture on the left. Replace swaps that photo and keeps its place."
                     values={form.gallery || []}
                     max={5}
-                    onChange={(gallery) => setForm({ ...form, gallery })}
+                    onPendingChange={setGridPending}
+                    onChange={(gallery) => setForm((current) => ({ ...current, gallery }))}
+                  />
+                  <MediaGalleryField
+                    label="Under the house"
+                    hint="The large photos under “Twenty couples, or twenty singles.” Replace swaps that photo and keeps its place."
+                    values={form.lower || []}
+                    max={4}
+                    onPendingChange={setLowerPending}
+                    onChange={(lower) => setForm((current) => ({ ...current, lower }))}
                   />
                 </div>
                 <div className="full">
@@ -987,8 +1013,8 @@ export default function StaffPages() {
               <button type="button" className="staffBtn staffBtnGhost" onClick={() => setForm(null)}>
                 Cancel
               </button>
-              <button type="submit" className="staffBtn">
-                Save
+              <button type="submit" className="staffBtn" disabled={gridPending || lowerPending}>
+                {gridPending || lowerPending ? 'Wait for photos' : 'Save'}
               </button>
             </div>
           </form>

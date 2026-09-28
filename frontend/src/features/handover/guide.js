@@ -1,165 +1,145 @@
+export const DEVELOPER_EMAIL = 'useadmin@iremetech.com'
+
 export const HANDOVER_TABS = [
-  { id: 'overview', label: 'What was built' },
-  { id: 'access', label: 'Sign in' },
-  { id: 'settings', label: 'Site setting' },
-  { id: 'pages', label: 'Pages' },
-  { id: 'rooms', label: 'Rooms' },
-  { id: 'amenities', label: 'Facilities' },
-  { id: 'menu', label: 'Menu items' },
-  { id: 'gallery', label: 'Gallery & media' },
-  { id: 'bookings', label: 'Bookings' },
-  { id: 'audit', label: 'Site audit' },
-  { id: 'feedback', label: 'Send feedback' },
+  { id: 'overview', label: 'What is ready' },
+  { id: 'bookings', label: 'How guests book' },
+  { id: 'inbox', label: 'Your bookings' },
+  { id: 'account', label: 'Your account' },
+  { id: 'manual', label: 'How to update the site' },
+  { id: 'upkeep', label: 'Keeping it online' },
+  { id: 'feedback', label: 'Ask a question' },
 ]
 
 export const HANDOVER_SECTIONS = {
   overview: {
-    title: 'What was built',
-    lead: 'Grand Villa Apartment now has a public website and a staff desk for day-to-day content.',
+    title: 'What is ready',
+    lead: 'The BE Inn Villa website is built. Guests can look around and ask to stay. You can read those requests and update the site after your account is approved.',
     blocks: [
       {
-        heading: 'Public website',
-        body: 'Guests can browse rooms, the restaurant, things to do, the gallery, about, contact, and book a stay. They never log in. Payments can go through card or Mobile Money when those services are connected, or they can pay on arrival.',
+        heading: 'What guests can do',
+        body: 'They can look at the rooms and photos, read about the villa and facilities, and send a stay request from the website. Guests do not create an account and they do not pay online. They pay at the hotel when they arrive.',
       },
       {
-        heading: 'Staff desk',
-        body: 'Use /staff for the simpler property desk: rooms, menu items, pages, photos, amenities, and reservations. Payload admin at /admin is the same content with a few extra tools, including this live site audit.',
+        heading: 'What you can do',
+        body: 'After you sign in, you can change room prices and photos, the phone and WhatsApp number, the hotel email, facilities, and the photo gallery. You can also open the list of stay requests at any time.',
       },
       {
-        heading: 'What to keep current',
-        body: 'Room photos and prices, restaurant highlights, gallery photos, contact numbers, and booking replies. The Site audit tab scores those items so you know where to focus.',
-      },
-    ],
-  },
-  access: {
-    title: 'How to sign in',
-    lead: 'Two doors, one property account. The password is never shown on this page.',
-    blocks: [
-      {
-        heading: 'Staff desk',
-        body: 'Open /staff, sign in with the property admin email, then use the left menu. This is the everyday place to change rooms, pages, and photos.',
-      },
-      {
-        heading: 'Full admin',
-        body: 'Open /admin for the same account. Use this if you prefer Payload’s screens, or to read handover feedback and the live audit.',
-      },
-      {
-        heading: 'Password',
-        body: 'Ireme shares the first password privately (email or WhatsApp). This page will not display it. If it is lost, use Forgot password on the login screen — a reset link is emailed to that account.',
-      },
-    ],
-  },
-  settings: {
-    title: 'Site setting',
-    lead: 'Property name, logo, phones, email, map, and search-engine text all live in one place.',
-    blocks: [
-      {
-        heading: 'Where to edit',
-        body: 'Staff desk → Site setting, or Admin → Site setting. Fill name, logo, phone, WhatsApp, email, address, and a Google Maps link or embed.',
-      },
-      {
-        heading: 'Why it matters',
-        body: 'The footer, contact page, and booking messages read from here. Empty phone or map fields show up on the site audit as items to finish.',
-      },
-    ],
-  },
-  pages: {
-    title: 'Website pages',
-    lead: 'Each public page has a matching edit screen. Change the header image and headline first — that is what guests see at the top.',
-    blocks: [
-      {
-        heading: 'Home',
-        body: 'Hero slides (photo + headline), welcome features, rooms intro, and location copy. Restaurant photos on the home page are edited under Bar & Restaurant → Home page section.',
-      },
-      {
-        heading: 'Other pages',
-        body: 'Accommodation, Bar & Restaurant, Things to do, Gallery, About, Contact, Booking, and Booking policy each have their own tab. Keep a header image and headline on every page.',
-      },
-    ],
-  },
-  rooms: {
-    title: 'Rooms',
-    lead: 'A room needs a name, nightly rate, description, main photo, extra photos, bed/occupancy, and in-room amenities.',
-    blocks: [
-      {
-        heading: 'Where to edit',
-        body: 'Staff desk → Rooms. Add or edit a room, then upload a main photo and a few gallery shots. Set how many physical rooms of that type you have. Tick the amenities that belong in that room (Wi-Fi, AC, bathroom, and so on).',
-      },
-      {
-        heading: 'What guests see',
-        body: 'The accommodation list and each room page. Missing photos or amenities lower the site audit score for that room.',
-      },
-    ],
-  },
-  amenities: {
-    title: 'Property facilities',
-    lead: 'Facilities are property-wide (parking, restaurant, front desk), not the in-room list on each room.',
-    blocks: [
-      {
-        heading: 'Where to edit',
-        body: 'Staff desk → Amenities. Add a name, short description, and a photo. Aim for at least three published facilities.',
-      },
-    ],
-  },
-  menu: {
-    title: 'Menu items',
-    lead: 'Each dish lives in Menu items, not on the restaurant page form. The page only holds the menu headline.',
-    blocks: [
-      {
-        heading: 'Where to edit',
-        body: 'Staff desk → Menu items, or Admin → Menu items. Add a name, price, category, photo, ingredients, and any allergens or dietary tags.',
-      },
-      {
-        heading: 'What guests see',
-        body: 'The Bar & Restaurant page shows the dishes in a grid. Details (hover or tap) open ingredients and notes. Guests can add items and send the order on WhatsApp with prices, total, and their notes.',
-      },
-    ],
-  },
-  gallery: {
-    title: 'Gallery and media',
-    lead: 'Media Gallery is the library. Site Gallery is what guests see on /gallery.',
-    blocks: [
-      {
-        heading: 'Upload once, reuse everywhere',
-        body: 'Staff desk → Media Gallery to upload. On any page or room, choose an existing file or upload a new one.',
-      },
-      {
-        heading: 'Publish to the gallery page',
-        body: 'Open the file and set Gallery category to Rooms, Bar & Restaurant, Property & views, or Amenities. Leave it on None to keep the file in the library only.',
+        heading: 'What happens when someone books',
+        body: 'The website saves the request, emails you, and emails the guest. If they choose WhatsApp, a message also opens to the WhatsApp number saved in your site settings.',
       },
     ],
   },
   bookings: {
-    title: 'Bookings',
-    lead: 'New reservations appear on the admin home and under Bookings. You can confirm, reply, or take a note on the conversation thread.',
+    title: 'How a guest asks to stay',
+    lead: 'The guest uses the booking form on the website. You do not need to be at a computer for this to work.',
     blocks: [
       {
-        heading: 'Daily use',
-        body: 'Filter by date, open a booking, and reply on WhatsApp or email — whichever the guest chose. Paste guest replies so the thread stays on that reservation.',
+        heading: 'What they fill in',
+        steps: [
+          'They choose the arrival date, the departure date, and how many people are coming.',
+          'They type their name, mobile number, and email. The email has to be a real address, or the form will not send.',
+          'They choose WhatsApp or email. That is how they want to reach the hotel.',
+          'They press send. The request is saved straight away.',
+        ],
       },
       {
-        heading: 'When the property is full',
-        body: 'Staff desk → Availability. Close the whole property or selected rooms for a date range (for example a football team until 8 September). The website stops those bookings. Tap Open again when you can take guests.',
-      },
-      {
-        heading: 'Payments',
-        body: 'Card and Mobile Money only work after those accounts are connected. Guests can always choose pay on arrival.',
+        heading: 'They pay later',
+        body: 'The website does not take a card payment. The note they receive says the stay is requested and payment is at the hotel.',
       },
     ],
   },
-  audit: {
-    title: 'Site audit',
-    lead: 'This score is calculated from live content. It is not a manual checklist.',
+  inbox: {
+    title: 'How a booking reaches you',
+    lead: 'You are notified when a request comes in, and you can also open the full list whenever you want.',
     blocks: [
       {
-        heading: 'How to use it',
-        body: 'Work through anything marked Focus. Open the staff desk link beside the item, add the missing photo or text, then refresh this page. The score updates from the website content itself.',
+        heading: 'You get an email',
+        body: 'The website emails the guest and emails the hotel at the same time. The hotel copy goes to the email address saved under Site setting. A copy also goes to the desk inbox arranged with Ireme Tech.',
+      },
+      {
+        heading: 'WhatsApp or email, their choice',
+        body: 'If the guest chooses WhatsApp, their phone opens a message to the WhatsApp number you saved in Site setting. If they choose email, the same request is sent by email. Either way, you still receive the email notification.',
+      },
+      {
+        heading: 'Those contacts come from your settings',
+        body: 'Open Site setting and fill in the hotel email, phone, and WhatsApp number. Those are the contacts the guest writes to. If they are empty, the guest cannot be sent to the right person.',
+      },
+      {
+        heading: 'See recent bookings any time',
+        steps: [
+          'Sign in to the staff pages.',
+          'Open Bookings.',
+          'The newest requests are listed there, with the guest’s name, dates, and contact details.',
+          'Open one request when you want to reply on WhatsApp or by email.',
+        ],
+      },
+    ],
+  },
+  account: {
+    title: 'Create your admin account',
+    lead: 'Use the button below to register. Then tell Ireme Tech which email you used. That account cannot open the admin pages until it is approved.',
+    blocks: [
+      {
+        heading: 'What to do',
+        steps: [
+          'Press Create your admin account and enter your name, email, and a password you will remember.',
+          'Send that same email address to Ireme Tech. We use it to turn the account on.',
+          'Until a super admin approves it, signing in will not work. A new registration cannot manage the hotel by itself.',
+          'After approval, open the staff pages and sign in with that email and password.',
+        ],
+      },
+      {
+        heading: 'If you forget the password',
+        body: 'On the sign-in page, press Forgot password. A reset link is emailed to you. The password is never written on this page.',
+      },
+    ],
+  },
+  manual: {
+    title: 'How to update the site',
+    lead: 'After your account is approved, these are the only places you usually need. You do not need to know how the website was built.',
+    blocks: [
+      {
+        heading: 'Day to day',
+        steps: [
+          'Site setting — the hotel name, logo, phone, WhatsApp, and email. Booking messages use these.',
+          'Rooms — the price, the cover photo, and extra photos for each room. Size, view, and the other details can be left blank. If you leave bedrooms empty, it is saved as 1.',
+          'Bookings — every stay request. Open one to see who is coming and how to reply.',
+          'Facilities and Gallery — what guests read about the property, and the photos on the gallery page.',
+        ],
+      },
+      {
+        heading: 'Two ways in',
+        body: 'The staff pages are the simple desk for everyday changes. The admin pages show the same information if you prefer that screen. Both use the account that was approved for you.',
+      },
+    ],
+  },
+  upkeep: {
+    title: 'Keeping the website online',
+    lead: 'The pages are finished. Guests can use the live address after the domain, the hosting, and the security certificate are in place.',
+    spotlight: {
+      label: 'Required before the site can go live',
+      items: ['Register the domain name', 'Set up the hosting', 'Add SSL security so the address starts with https'],
+      fee: '$80',
+      feeNote: 'Paid every year to renew the domain, hosting, and SSL.',
+    },
+    blocks: [
+      {
+        heading: 'What still has to be set up',
+        body: 'Register the domain name, set up the hosting, and add SSL security so the address starts with https. Until those are in place, the site is not on its public address.',
+      },
+      {
+        heading: 'Once a year',
+        body: 'The domain, hosting, and SSL are renewed every year. That renewal is $80.',
+      },
+      {
+        heading: 'Help after handover',
+        body: 'Ireme Tech remains available to help with the hosting renewal and with any technical problem. Write to the same address you use when you ask for your admin account to be approved.',
       },
     ],
   },
   feedback: {
-    title: 'Tell us what to improve',
-    lead: 'If something is missing, unclear, or should work differently, send a note. Ireme can see it in admin under Handover notes.',
+    title: 'Ask a question',
+    lead: 'If something is unclear or you want a change, send a note here. Ireme Tech can read it from the admin pages.',
     blocks: [],
   },
 }

@@ -3,7 +3,7 @@ import { useSiteLayout } from '@lib/queries/useSiteLayout'
 import { PUBLIC_NAV, publicPlace } from '@features/hotel/brand'
 import { INN, VISIT } from '@features/hotel/inn'
 import { brandFromCompany } from '@features/hotel/companyBrand'
-import { normalizeSocials, visibleSocials } from '@features/hotel/socials'
+import { normalizeOtas, normalizeSocials, visibleOtas, visibleSocials } from '@features/hotel/socials'
 import { SOCIAL_ICONS } from '@features/hotel/socialIcons'
 import styles from './Footer.module.css'
 
@@ -12,6 +12,7 @@ export default function Footer() {
   const company = data?.company || {}
   const brand = brandFromCompany(company)
   const socials = visibleSocials(normalizeSocials(company.socials))
+  const otas = visibleOtas(normalizeOtas(company.otas))
   const address = publicPlace(company.address, VISIT.headline)
   const mapUrl = company.mapUrl && !/karongi|kivu/i.test(company.mapUrl) ? company.mapUrl : VISIT.mapUrl
   const phone = company.phone
@@ -22,7 +23,6 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.brand}>
           <img className={styles.seal} src={brand.seal} alt="" />
-          <p className={styles.kicker}>Visit</p>
           <h2>{brand.name}</h2>
           <p className={styles.intro}>{VISIT.body}</p>
           <p className={styles.address}>{address}</p>
@@ -31,6 +31,15 @@ export default function Footer() {
               {socials.map(({ name, label, href }) => (
                 <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
                   {SOCIAL_ICONS[name]}
+                </a>
+              ))}
+            </div>
+          )}
+          {otas.length > 0 && (
+            <div className={styles.otas}>
+              {otas.map(({ name, label, href }) => (
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer">
+                  {label}
                 </a>
               ))}
             </div>

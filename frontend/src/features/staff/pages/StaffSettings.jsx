@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { staffClient, mediaId } from '../api/staffClient'
 import { useStaffAuth } from '../auth/StaffAuthContext'
 import MediaField from '../components/MediaField'
-import { SOCIAL_PLATFORMS, emptySocials, normalizeSocials } from '@features/hotel/socials'
+import { OTA_PLATFORMS, SOCIAL_PLATFORMS, emptyOtas, emptySocials, normalizeOtas, normalizeSocials } from '@features/hotel/socials'
 import '../staff.css'
 
 const empty = {
@@ -26,6 +26,7 @@ const empty = {
   seoDescription: '',
   seoKeywords: '',
   socials: emptySocials(),
+  otas: emptyOtas(),
 }
 
 export default function StaffSettings() {
@@ -42,6 +43,7 @@ export default function StaffSettings() {
           ...empty,
           ...res.data,
           socials: normalizeSocials(res.data.socials),
+          otas: normalizeOtas(res.data.otas),
         }),
       )
       .catch(() => toast.error('Could not load site settings.'))
@@ -56,6 +58,7 @@ export default function StaffSettings() {
         logo: mediaId(form.logo) || undefined,
         icon: mediaId(form.icon) || undefined,
         socials: normalizeSocials(form.socials),
+        otas: normalizeOtas(form.otas),
       })
       toast.success('Site settings saved.')
       queryClient.invalidateQueries({ queryKey: ['site-layout'] })
@@ -180,6 +183,27 @@ export default function StaffSettings() {
                       setForm({
                         ...form,
                         socials: { ...emptySocials(), ...form.socials, [name]: e.target.value },
+                      })
+                    }
+                  />
+                </label>
+              ))}
+            </div>
+            <strong style={{ display: 'block', marginTop: '1.15rem' }}>Booking sites</strong>
+            <p className="staffLead" style={{ margin: '0.35rem 0 0.6rem' }}>
+              Paste each listing URL. On the website, a filled link opens in a new tab. Blank or invalid links stay hidden.
+            </p>
+            <div className="formGrid">
+              {OTA_PLATFORMS.map(({ name, label }) => (
+                <label key={name} className="staffField col-3">
+                  {label}
+                  <input
+                    placeholder="https://"
+                    value={form.otas?.[name] || ''}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        otas: { ...emptyOtas(), ...form.otas, [name]: e.target.value },
                       })
                     }
                   />

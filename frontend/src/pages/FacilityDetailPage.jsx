@@ -40,8 +40,11 @@ export default function FacilityDetailPage() {
                 ? 'Request this with your rooms. It stays with your group until checkout, then it is free for the next reservation.'
                 : 'Guests can request this with a stay. Friends and visitors can use it too, when it is free.'}
             </p>
-            {facility.summary && <p>{facility.summary}</p>}
-            <RichText className={styles.copy} value={facility.descriptionHtml || facility.description} />
+            {facility.description ? (
+              <RichText className={styles.copy} value={facility.descriptionHtml || facility.description} />
+            ) : (
+              facility.summary && <p>{facility.summary}</p>
+            )}
           </Reveal>
           <Reveal delay={100}>
             <HouseHold facilityId={facility.id} />

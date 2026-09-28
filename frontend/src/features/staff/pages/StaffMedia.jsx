@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { mediaUrl } from '@features/hotel/adapters'
 import { GALLERY_CATEGORIES } from '@features/hotel/gallery/categories'
 import { staffClient } from '../api/staffClient'
-import { formatBytes, prepareUploadFiles, uploadMediaFile } from '../lib/prepareImage'
+import { chosenFiles, formatBytes, prepareUploadFile, uploadMediaFile } from '../lib/prepareImage'
 import '../staff.css'
 import fieldStyles from '../components/MediaField.module.css'
 
@@ -45,18 +45,36 @@ export default function StaffMedia() {
   }, [queue])
 
   async function pickFiles(event) {
-    const files = event.target.files
-    event.target.value = ''
-    if (!files?.length) return
-    try {
-      const prepared = await prepareUploadFiles(files)
-      setQueue((current) => {
-        current.forEach((item) => URL.revokeObjectURL(item.preview))
-        return prepared
+    const files = chosenFiles(event)
+    if (!files.length) return
+    const immediate = files.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+      resized: false,
+      originalSize: file.size,
+      finalSize: file.size,
+    }))
+    setQueue((current) => {
+      current.forEach((item) => URL.revokeObjectURL(item.preview))
+      return immediate
+    })
+    const prepared = await Promise.all(files.map(async (file, index) => {
+      try {
+        return await prepareUploadFile(file)
+      } catch {
+        return immediate[index]
+      }
+    }))
+    setQueue((current) => {
+      if (current !== immediate && !current.some((item) => item.preview === immediate[0]?.preview)) {
+        prepared.forEach((item) => URL.revokeObjectURL(item.preview))
+        return current
+      }
+      immediate.forEach((item, index) => {
+        if (prepared[index]?.preview !== item.preview) URL.revokeObjectURL(item.preview)
       })
-    } catch {
-      toast.error('Could not prepare these images.')
-    }
+      return prepared
+    })
   }
 
   function clearQueue() {

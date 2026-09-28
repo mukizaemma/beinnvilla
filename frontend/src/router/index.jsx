@@ -17,6 +17,7 @@ const NotFoundPage      = lazy(() => import('@pages/NotFoundPage'))
 const StaffRoot         = lazy(() => import('@features/staff/StaffRoot'))
 const StaffLayout       = lazy(() => import('@features/staff/layout/StaffLayout'))
 const StaffLoginPage    = lazy(() => import('@features/staff/pages/StaffLoginPage'))
+const StaffJoinPage     = lazy(() => import('@features/staff/pages/StaffJoinPage'))
 const StaffForgotPage   = lazy(() => import('@features/staff/pages/StaffForgotPage'))
 const StaffResetPage    = lazy(() => import('@features/staff/pages/StaffResetPage'))
 const StaffDashboard    = lazy(() => import('@features/staff/pages/StaffDashboard'))
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
     element: <Wrap Component={StaffRoot} />,
     children: [
       { path: 'login', element: <Wrap Component={StaffLoginPage} /> },
+      { path: 'join', element: <Wrap Component={StaffJoinPage} /> },
       { path: 'forgot', element: <Wrap Component={StaffForgotPage} /> },
       { path: 'reset/:token', element: <Wrap Component={StaffResetPage} /> },
       {

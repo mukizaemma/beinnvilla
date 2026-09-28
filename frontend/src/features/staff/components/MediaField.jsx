@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { mediaUrl } from '@features/hotel/adapters'
 import { mediaId, staffClient } from '../api/staffClient'
-import { formatBytes, prepareUploadFile, uploadMediaFile } from '../lib/prepareImage'
+import { chosenFiles, formatBytes, prepareUploadFile, uploadMediaFile } from '../lib/prepareImage'
 import MediaLibraryPicker from './MediaLibraryPicker'
 import styles from './MediaField.module.css'
 
@@ -24,12 +24,27 @@ export default function MediaField({
   }, [pending])
 
   async function pickFile(event) {
-    const file = event.target.files?.[0]
-    event.target.value = ''
+    const [file] = chosenFiles(event)
     if (!file) return
+    if (pending?.preview) URL.revokeObjectURL(pending.preview)
+    const immediate = {
+      file,
+      preview: URL.createObjectURL(file),
+      resized: false,
+      originalSize: file.size,
+      finalSize: file.size,
+    }
+    setPending(immediate)
     try {
-      if (pending?.preview) URL.revokeObjectURL(pending.preview)
-      setPending(await prepareUploadFile(file))
+      const prepared = await prepareUploadFile(file)
+      setPending((current) => {
+        if (!current || current.preview !== immediate.preview) {
+          URL.revokeObjectURL(prepared.preview)
+          return current
+        }
+        if (prepared.preview !== immediate.preview) URL.revokeObjectURL(immediate.preview)
+        return prepared
+      })
     } catch {
       toast.error('Could not prepare this file.')
     }

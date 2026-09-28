@@ -52,6 +52,12 @@ function welcomeBody(raw) {
   return text
 }
 
+function lowerPhotos(page) {
+  const chosen = (page.homeLower || []).map((item) => mediaUrl(item.photo)).filter(Boolean)
+  if (chosen.length) return chosen.slice(0, 4)
+  return (page.stats || []).map((item) => mediaUrl(item.image)).filter(Boolean).slice(0, 4)
+}
+
 function adaptHighlights(rows) {
   const highlights = (rows || []).map((item) => item.text).filter(Boolean)
   const repeatsVilla = highlights.some((text) => /six bedrooms|in-house bar/i.test(text))
@@ -88,6 +94,7 @@ async function fetchHomePage() {
 
     features: adaptFeatures(page.features),
     gallery: (page.homeGallery || []).map((item) => mediaUrl(item.photo)).filter(Boolean).slice(0, 5),
+    lower: lowerPhotos(page),
 
     destination: {
       eyebrow: page.welcome?.eyebrow || DESTINATION.eyebrow,

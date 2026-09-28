@@ -70,13 +70,25 @@ export function pickApartment(rooms = []) {
  * `price` is flat/one-time (see Experiences.js), unlike a room's
  * `pricePerNight`.
  */
+export function publicExcerpt(value, limit = 160) {
+  const raw = typeof value === 'string' && value.includes('<')
+    ? value.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/g, '&')
+    : asPlain(value)
+  const clean = String(raw || '').replace(/\s+/g, ' ').trim()
+  if (clean.length <= limit) return clean
+  const cut = clean.slice(0, limit)
+  const space = cut.lastIndexOf(' ')
+  return `${(space > 60 ? cut.slice(0, space) : cut).trim()}…`
+}
+
 export function adaptFacility(doc) {
   const gallery = (doc.gallery || []).map((item) => mediaUrl(item.photo)).filter(Boolean)
   const image = mediaUrl(doc.image) || gallery[0] || ''
+  const full = asPlain(doc.description)
   return {
     id: doc.slug,
     name: doc.name,
-    summary: doc.summary || asPlain(doc.description),
+    summary: publicExcerpt(full || doc.summary),
     description: asPlain(doc.description),
     descriptionHtml: doc.description,
     audience: doc.audience === 'exclusive' ? 'exclusive' : 'visitors',

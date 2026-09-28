@@ -77,6 +77,101 @@
   font-size: 0.92rem;
 }
 
+.roomCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #161310;
+  color: var(--color-paper);
+  overflow: hidden;
+}
+
+.roomPhoto {
+  display: block;
+}
+
+.roomPhoto img,
+.roomCard .fill {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #1a1613;
+}
+
+.roomBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem 1rem 1.15rem;
+}
+
+.roomBody h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.roomBody p {
+  margin: 0.4rem 0 0;
+  color: rgba(243, 238, 230, 0.78);
+  font-size: 0.92rem;
+}
+
+.roomPrice {
+  margin-top: 0.85rem;
+  color: #fff;
+}
+
+.roomPrice strong {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gold, #e4b423);
+}
+
+.roomPrice span {
+  font-size: 0.85rem;
+  color: rgba(243, 238, 230, 0.72);
+}
+
+.roomBreakfast {
+  font-size: 0.82rem;
+}
+
+.roomActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.details,
+.book {
+  display: grid;
+  place-items: center;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.details {
+  border: 1px solid rgba(243, 238, 230, 0.45);
+  color: #fff;
+}
+
+.book {
+  background: var(--color-ember);
+  color: #fff;
+}
+
 .visit {
   display: grid;
   gap: 2rem;
@@ -114,4 +209,14 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.otas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+}
+
+.otas a {
+  font-weight: 700;
 }

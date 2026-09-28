@@ -3,10 +3,8 @@ import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Eye, X } from 'lucide-react'
 import { useHomePage } from '@lib/queries/useHomePage'
-import { useGalleryPage } from '@lib/queries/useGalleryPage'
 import { useSiteLayout } from '@lib/queries/useSiteLayout'
 import { useFacilities } from '@features/hotel/queries/useFacilities'
-import { isLegacyName } from '@features/hotel/brand'
 import { HERO, INN } from '@features/hotel/inn'
 import { useInView } from '@hooks/useInView'
 import PageLoader from '@components/ui/PageLoader'
@@ -14,48 +12,9 @@ import Reveal from '@components/ui/Reveal'
 import HouseStayForm from '@sections/booking/HouseStayForm'
 import styles from './HomePage.module.css'
 
-function collectShots(page, galleryImages) {
-  const shots = []
-  const seen = new Set()
-
-  function add(image, meta) {
-    if (!image || seen.has(image)) return
-    seen.add(image)
-    shots.push({ image, ...meta })
-  }
-
-  for (const slide of page.hero?.slides || []) {
-    add(slide.image, { caption: slide.headline, group: 'building' })
-  }
-  add(page.destination?.images?.primary, { caption: 'The house', group: 'building' })
-  add(page.destination?.images?.secondary, { caption: 'The house', group: 'building' })
-  add(page.location?.image, { caption: 'Kigali at night', group: 'views' })
-  add(page.cta?.backgroundImage, { caption: 'The view', group: 'views' })
-
-  for (const item of galleryImages) {
-    const group =
-      item.category === 'rooms'
-        ? 'rooms'
-        : item.category === 'bar-restaurant' || item.category === 'amenities'
-          ? 'table'
-          : 'views'
-    add(item.image, { caption: item.caption, group, id: item.id })
-  }
-
-  for (const room of page.rooms || []) {
-    const name = isLegacyName(room.name) ? '' : room.name
-    const href = `/accommodation/${room.id}`
-    add(room.image, { caption: name, group: 'rooms', href, id: room.id })
-    for (const image of room.gallery || []) {
-      add(image, { caption: name, group: 'rooms', href, id: `${room.id}-${image}` })
-    }
-  }
-
-  return shots
-}
-
 function Slideshow({ slides, onIndex }) {
   const [index, setIndex] = useState(0)
+  const [order, setOrder] = useState([])
   const count = slides.length
 
   useEffect(() => {
@@ -63,24 +22,41 @@ function Slideshow({ slides, onIndex }) {
   }, [index, onIndex])
 
   useEffect(() => {
+    setOrder((stack) => {
+      const next = Array.from({ length: count }, (_, i) => stack[i] || 0)
+      const top = next.reduce((max, value) => Math.max(max, value), 0)
+      next[index] = top + 1
+      return next
+    })
+  }, [index, count])
+
+  useEffect(() => {
     if (count < 2) return undefined
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
-    const timer = window.setInterval(() => setIndex((current) => (current + 1) % count), 5500)
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % count), 8000)
     return () => window.clearInterval(timer)
   }, [count])
 
   if (!count) return <div className={styles.chapterFill} />
 
   return (
-    <div className={styles.track} style={{ transform: `translateX(-${index * 100}%)` }}>
-      {slides.map((shot) => (
-        <img key={shot.image} className={styles.slide} src={shot.image} alt="" />
-      ))}
+    <div className={styles.stage}>
+      <div className={styles.motion}>
+        {slides.map((shot, i) => (
+          <img
+            key={`${shot.image}-${i}`}
+            className={i === index ? styles.shotOn : styles.shot}
+            style={{ zIndex: order[i] || 0 }}
+            src={shot.image}
+            alt=""
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
-function GalleryMosaic({ images }) {
+function GalleryMosaic({ images, variant = 'grid' }) {
   const [open, setOpen] = useState(null)
 
   useEffect(() => {
@@ -101,23 +77,28 @@ function GalleryMosaic({ images }) {
 
   if (!images.length) return null
 
+  const cards = images.map((image, index) => (
+    <Reveal
+      key={image}
+      as="button"
+      type="button"
+      className={variant === 'offers' ? styles.offer : styles.photoCard}
+      delay={index * 70}
+      onClick={() => setOpen(index)}
+      aria-label={`Open photograph ${index + 1} of ${images.length}`}
+    >
+      <img src={image} alt="" />
+      {variant === 'offers' && (
+        <span className={styles.viewIcon}>
+          <Eye size={18} strokeWidth={1.75} />
+        </span>
+      )}
+    </Reveal>
+  ))
+
   return (
     <>
-      <div className={styles.photoGrid}>
-        {images.map((image, index) => (
-          <Reveal
-            key={image}
-            as="button"
-            type="button"
-            className={styles.photoCard}
-            delay={index * 70}
-            onClick={() => setOpen(index)}
-            aria-label={`Open photograph ${index + 1} of ${images.length}`}
-          >
-            <img src={image} alt="" />
-          </Reveal>
-        ))}
-      </div>
+      {variant === 'offers' ? cards : <div className={styles.photoGrid}>{cards}</div>}
       {open != null && createPortal(
         <div className={styles.viewer} role="dialog" aria-modal="true" aria-label="Photograph">
           <div className={styles.viewerBar}>
@@ -181,11 +162,10 @@ function CountUp({ to }) {
 
 export default function HomePage() {
   const home = useHomePage()
-  const gallery = useGalleryPage()
   const layout = useSiteLayout()
   const facilitiesQuery = useFacilities()
   const [heroIndex, setHeroIndex] = useState(0)
-  const isLoading = home.isLoading || gallery.isLoading || layout.isLoading || facilitiesQuery.isLoading
+  const isLoading = home.isLoading || layout.isLoading || facilitiesQuery.isLoading
 
   useEffect(() => {
     if (isLoading || window.location.hash !== '#stay') return undefined
@@ -217,25 +197,11 @@ export default function HomePage() {
   }
 
   const page = home.data
-  const shots = collectShots(page, gallery.data?.images || [])
-  const heroSlides = shots.filter((shot) => shot.group === 'building' || shot.group === 'views').slice(0, 5)
-  heroSlides.forEach((shot) => {
-    shot.used = true
-  })
-  const galleryImages = (page.gallery?.length
-    ? page.gallery
-    : shots.map((shot) => shot.image).filter((image, index, list) => image && list.indexOf(image) === index)
-  ).slice(0, 5)
-  const facilityImages = [
-    ...shots.filter((shot) => shot.group === 'table'),
-    ...shots.filter((shot) => shot.group !== 'table'),
-  ]
-    .map((shot) => shot.image)
-    .filter((image, index, list) => image && list.indexOf(image) === index)
-  const facilities = (facilitiesQuery.data || []).slice(0, 4).map((item, index) => ({
-    ...item,
-    image: item.image || facilityImages[index] || '',
-  })).filter((item) => item.image)
+  const heroSlides = (page.hero?.slides || [])
+    .map((slide) => ({ image: slide.image }))
+    .filter((slide) => slide.image)
+  const galleryImages = page.gallery || []
+  const lowerImages = page.lower || []
   const enjoyed = (facilitiesQuery.data || []).map((item) => item.name)
   const line = HERO.lines[heroIndex % HERO.lines.length]
 
@@ -304,23 +270,11 @@ export default function HomePage() {
         </a>
       </section>
 
-      <section id="facilities" className={styles.offers} style={{ zIndex: 4 }} aria-label="Facilities">
-        {facilities.map((item, index) => (
-          <Reveal
-            key={item.id}
-            as={Link}
-            to={`/facilities/${item.id}`}
-            className={styles.offer}
-            delay={index * 80}
-            aria-label={`View ${item.name}`}
-          >
-            <img src={item.image} alt="" />
-            <span className={styles.viewIcon}>
-              <Eye size={18} strokeWidth={1.75} />
-            </span>
-          </Reveal>
-        ))}
-      </section>
+      {lowerImages.length > 0 && (
+        <section id="facilities" className={styles.offers} style={{ zIndex: 4 }} aria-label="Photos under the house">
+          <GalleryMosaic images={lowerImages} variant="offers" />
+        </section>
+      )}
 
       <section id="stay" className={styles.stay} style={{ zIndex: 5 }}>
         <div className={styles.stayLead}>

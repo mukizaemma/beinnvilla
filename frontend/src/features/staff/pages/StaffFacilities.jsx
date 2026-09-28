@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { asHtml, htmlToLexical } from '@lib/richText'
-import { mediaUrl } from '@features/hotel/adapters'
+import { mediaUrl, publicExcerpt } from '@features/hotel/adapters'
 import { staffClient, mediaId } from '../api/staffClient'
 import { slugify } from '../lib/slugify'
 import MediaGalleryField from '../components/MediaGalleryField'
@@ -23,6 +23,7 @@ const empty = {
 export default function StaffFacilities() {
   const [rows, setRows] = useState([])
   const [form, setForm] = useState(null)
+  const [photosPending, setPhotosPending] = useState(false)
 
   async function load() {
     const { data } = await staffClient.get('/api/facilities?limit=100&sort=sort&depth=1')
@@ -41,7 +42,7 @@ export default function StaffFacilities() {
       slug: form.slug || slugify(form.name),
       audience: form.audience,
       available: Boolean(form.available),
-      summary: form.summary,
+      summary: publicExcerpt(form.description),
       sort: Number(form.sort) || 0,
       description: htmlToLexical(form.description),
       image: gallery[0] || undefined,
@@ -75,7 +76,7 @@ export default function StaffFacilities() {
         Jacuzzi and meetings are held with a stay until checkout. Sauna, bar, and restaurant can also be open to friends and visitors.
       </p>
       <div className="staffToolbar">
-        <button type="button" className="staffBtn" onClick={() => setForm({ ...empty })}>
+        <button type="button" className="staffBtn" onClick={() => { setPhotosPending(false); setForm({ ...empty }) }}>
           Add facility
         </button>
       </div>
@@ -102,13 +103,14 @@ export default function StaffFacilities() {
                     <button
                       type="button"
                       className="staffBtn staffBtnGhost"
-                      onClick={() =>
+                      onClick={() => {
+                        setPhotosPending(false)
                         setForm({
                           ...row,
                           description: asHtml(row.description),
                           gallery: (row.gallery || []).map((item) => item.photo).filter(Boolean),
                         })
-                      }
+                      }}
                     >
                       Edit
                     </button>
@@ -128,7 +130,7 @@ export default function StaffFacilities() {
         </table>
       </div>
       {form && (
-        <StaffModal title={form.id ? 'Edit facility' : 'Add facility'} onClose={() => setForm(null)}>
+        <StaffModal title={form.id ? 'Edit facility' : 'Add facility'} wide onClose={() => setForm(null)}>
           <form onSubmit={save} className="formGrid">
             <label className="staffField col-6">
               Name
@@ -153,28 +155,31 @@ export default function StaffFacilities() {
               />
               Available to request
             </label>
-            <label className="staffField full">
-              Short line
-              <textarea rows={2} value={form.summary || ''} onChange={(e) => setForm({ ...form, summary: e.target.value })} />
-            </label>
-            <SummernoteField
-              key={form.id || 'new-facility'}
-              className="col-8"
-              label="Description"
-              value={form.description}
-              onChange={(description) => setForm((current) => ({ ...current, description }))}
-            />
+            <div className="full">
+              <SummernoteField
+                key={form.id || 'new-facility'}
+                label="Description"
+                value={form.description}
+                onChange={(description) => setForm((current) => ({ ...current, description }))}
+              />
+              <p className="staffLead">
+                Write this once. The facilities list shows the first 160 characters. The facility page shows the full text.
+              </p>
+            </div>
             <MediaGalleryField
-              label="Photos"
+              label="Gallery"
+              hint="The first photo is the cover. Add more photos and they appear in the gallery on this facility’s page."
               values={form.gallery}
-              onChange={(gallery) => setForm({ ...form, gallery })}
+              max={24}
+              onPendingChange={setPhotosPending}
+              onChange={(gallery) => setForm((current) => ({ ...current, gallery }))}
             />
             <div className="formActions full">
               <button type="button" className="staffBtn staffBtnGhost" onClick={() => setForm(null)}>
                 Cancel
               </button>
-              <button type="submit" className="staffBtn">
-                Save
+              <button type="submit" className="staffBtn" disabled={photosPending}>
+                {photosPending ? 'Wait for photos' : 'Save'}
               </button>
             </div>
           </form>

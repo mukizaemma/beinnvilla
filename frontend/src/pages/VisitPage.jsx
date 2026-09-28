@@ -3,6 +3,7 @@ import { useSiteLayout } from '@lib/queries/useSiteLayout'
 import { brandFromCompany } from '@features/hotel/companyBrand'
 import { publicPlace } from '@features/hotel/brand'
 import { INN, VISIT } from '@features/hotel/inn'
+import { normalizeOtas, visibleOtas } from '@features/hotel/socials'
 import { usePageHeader } from '@features/hotel/queries/usePageHeader'
 import PageLoader from '@components/ui/PageLoader'
 import ScreenHeader from '@components/ui/ScreenHeader'
@@ -17,6 +18,7 @@ export default function VisitPage() {
   const brand = brandFromCompany(company)
   const address = publicPlace(company?.address, VISIT.headline)
   const mapUrl = company?.mapUrl && !/karongi|kivu/i.test(company.mapUrl) ? company.mapUrl : VISIT.mapUrl
+  const otas = visibleOtas(normalizeOtas(company?.otas))
 
   return (
     <>
@@ -56,6 +58,18 @@ export default function VisitPage() {
               <dd>20 couples or 20 singles</dd>
               <dt>Events</dt>
               <dd>Up to {INN.eventGuests} guests</dd>
+              {otas.length > 0 && (
+                <>
+                  <dt>Book on</dt>
+                  <dd className={styles.otas}>
+                    {otas.map(({ name, label, href }) => (
+                      <a key={name} href={href} target="_blank" rel="noopener noreferrer">
+                        {label}
+                      </a>
+                    ))}
+                  </dd>
+                </>
+              )}
             </dl>
           </Reveal>
         </div>

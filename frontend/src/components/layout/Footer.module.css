@@ -49,15 +49,6 @@
   margin-bottom: 1.25rem;
 }
 
-.kicker {
-  margin: 0 0 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-}
-
 .inner h2 {
   margin: 0;
   font-family: var(--font-display);
@@ -201,6 +192,24 @@
   border-color: var(--color-gold);
 }
 
+.otas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem 0.85rem;
+  margin-top: 0.9rem;
+}
+
+.otas a {
+  color: var(--color-gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.otas a:hover {
+  color: #fff;
+}
+
 .bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.1rem clamp(1.25rem, 5vw, 2rem) 1.4rem;
@@ -230,7 +239,8 @@
   .facts,
   .contact,
   .nav,
-  .socials {
+  .socials,
+  .otas {
     justify-content: flex-start;
   }
 

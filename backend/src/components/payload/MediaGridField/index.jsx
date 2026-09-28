@@ -43,17 +43,29 @@ export function MediaGridField({ field, path, readOnly }) {
     return () => jobsRef.current.forEach((job) => URL.revokeObjectURL(job.preview))
   }, [])
 
+  function rememberJobs(next) {
+    jobsRef.current = next
+    setJobs(next)
+  }
+
   async function uploadJob(job) {
     try {
       const doc = await uploadPreparedFile(job.file)
       if (!jobsRef.current.some((item) => item.id === job.id)) return
       const id = mediaId(doc)
       setKnown((current) => ({ ...current, [id]: doc }))
-      const next = [...rowsRef.current, { [key]: id }].slice(0, max)
+      const list = rowsRef.current.slice()
+      if (Number.isInteger(job.replaceIndex)) {
+        if (job.replaceIndex >= list.length) return
+        list[job.replaceIndex] = { [key]: id }
+      } else {
+        list.push({ [key]: id })
+      }
+      const next = list.slice(0, max)
       rowsRef.current = next
       setValue(next)
       URL.revokeObjectURL(job.preview)
-      setJobs((current) => current.filter((item) => item.id !== job.id))
+      rememberJobs(jobsRef.current.filter((item) => item.id !== job.id))
     } catch {
       setJobs((current) => current.map((item) => (item.id === job.id ? { ...item, status: 'failed' } : item)))
     }
@@ -85,7 +97,8 @@ export function MediaGridField({ field, path, readOnly }) {
   function pickFiles(event) {
     const selected = chosenFiles(event)
     if (!selected.length || readOnly) return
-    const room = Math.max(0, max - rows.length - jobsRef.current.length)
+    const adding = jobsRef.current.filter((job) => !Number.isInteger(job.replaceIndex)).length
+    const room = Math.max(0, max - rows.length - adding)
     if (!room) return
     const nextJobs = selected.slice(0, room).map((file) => ({
       id: crypto.randomUUID(),
@@ -93,15 +106,29 @@ export function MediaGridField({ field, path, readOnly }) {
       preview: URL.createObjectURL(file),
       status: 'uploading',
     }))
-    const next = [...jobsRef.current, ...nextJobs]
-    jobsRef.current = next
-    setJobs(next)
+    rememberJobs([...jobsRef.current, ...nextJobs])
     nextJobs.forEach((job) => prepareAndUpload(job))
+  }
+
+  function replaceWithFile(index, event) {
+    const [file] = chosenFiles(event)
+    if (!file || readOnly) return
+    const previous = jobsRef.current.find((job) => job.replaceIndex === index)
+    if (previous) URL.revokeObjectURL(previous.preview)
+    const job = {
+      id: crypto.randomUUID(),
+      file,
+      preview: URL.createObjectURL(file),
+      status: 'uploading',
+      replaceIndex: index,
+    }
+    rememberJobs([...jobsRef.current.filter((item) => item.replaceIndex !== index), job])
+    prepareAndUpload(job)
   }
 
   function removeJob(job) {
     URL.revokeObjectURL(job.preview)
-    setJobs((current) => current.filter((item) => item.id !== job.id))
+    rememberJobs(jobsRef.current.filter((item) => item.id !== job.id))
   }
 
   function removeAt(index) {
@@ -130,7 +157,8 @@ export function MediaGridField({ field, path, readOnly }) {
         {rows.map((row, index) => {
           const id = mediaId(row?.[key])
           const doc = typeof row?.[key] === 'object' ? row[key] : known[id]
-          const src = mediaSrc(doc)
+          const replacing = jobs.find((job) => job.replaceIndex === index)
+          const src = replacing?.preview || mediaSrc(doc)
           return (
             <article key={id || index} className="media-grid-field__tile">
               {src ? <img src={src} alt="" /> : <div className="media-grid-field__empty">Photo {index + 1}</div>}
@@ -139,11 +167,25 @@ export function MediaGridField({ field, path, readOnly }) {
                   ×
                 </button>
               )}
-              <small>Uploaded</small>
+              <div className="media-grid-field__bar">
+                <small className={replacing?.status === 'failed' ? 'media-grid-field__failed' : undefined}>
+                  {replacing ? (replacing.status === 'uploading' ? 'Replacing…' : 'Not replaced') : 'Uploaded'}
+                </small>
+                {!readOnly && (replacing?.status === 'failed' ? (
+                  <button type="button" className="media-grid-field__replace" onClick={() => retryJob(replacing)}>
+                    Try again
+                  </button>
+                ) : (
+                  <label className="media-grid-field__replace">
+                    Replace
+                    <input type="file" accept="image/*" hidden onChange={(event) => replaceWithFile(index, event)} />
+                  </label>
+                ))}
+              </div>
             </article>
           )
         })}
-        {jobs.map((job) => (
+        {jobs.filter((job) => !Number.isInteger(job.replaceIndex)).map((job) => (
           <article key={job.id} className="media-grid-field__tile">
             <img src={job.preview} alt={job.file.name} />
             <button type="button" className="media-grid-field__remove" onClick={() => removeJob(job)} aria-label="Remove photo">
@@ -161,7 +203,7 @@ export function MediaGridField({ field, path, readOnly }) {
         ))}
       </div>
 
-      {!readOnly && rows.length + jobs.length < max && (
+      {!readOnly && rows.length + jobs.filter((job) => !Number.isInteger(job.replaceIndex)).length < max && (
         <div className="media-grid-field__actions">
           <label>
             Add images

@@ -112,8 +112,8 @@ export default function StaffUsers() {
       <h1>Users</h1>
       <p className="staffLead">
         {superAdmin
-          ? 'You can add admins. Admins can manage editors and site settings, and cannot add another admin.'
-          : 'You can add, edit, and remove editors. Only a super admin can add an admin.'}
+          ? 'Accounts created from the handover link stay inactive until you set Status to Active. Only then can that person sign in.'
+          : 'You can add, edit, and remove editors. Only a super admin can approve a new admin account.'}
       </p>
       <div className="staffToolbar">
         <button type="button" className="staffBtn" onClick={openCreate}>
