@@ -1,0 +1,48 @@
+.panel {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* background-attachment: fixed is unreliable on most mobile browsers —
+   fall back to a normal scrolling background there. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .panel {
+    background-attachment: scroll;
+    min-height: 60vh;
+  }
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 12, 12, 0.75) 0%,
+    rgba(8, 12, 12, 0.15) 55%,
+    rgba(8, 12, 12, 0.1) 100%
+  );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  padding-bottom: var(--space-2xl);
+  max-width: 34rem;
+}
+
+.title {
+  font-size: var(--fs-h1);
+  color: var(--color-sand);
+  margin-bottom: var(--space-sm);
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-sand-muted);
+  line-height: var(--lh-body);
+}

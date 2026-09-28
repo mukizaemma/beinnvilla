@@ -1,0 +1,174 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  background: #f4f1ea;
+  color: #2b2b28;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.sidebar {
+  background: #111111;
+  color: #f5efe6;
+  padding: 1.25rem 0.9rem;
+}
+
+.brand {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 0.4rem;
+}
+
+.mark,
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e4b423;
+  flex-shrink: 0;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.logo {
+  object-fit: cover;
+  background: #1b9a43;
+}
+
+.brand strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.brand small {
+  color: #d8cdbe;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  color: #f5efe6;
+  font-size: 0.88rem;
+}
+
+.sidebar a:hover,
+.active {
+  background: rgba(212, 175, 106, 0.16);
+  color: #e4b423;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+.top {
+  background: #fff;
+  border-bottom: 1px solid #e5ddcd;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.menu {
+  display: none;
+  border: 0;
+  background: #f5efe6;
+  border-radius: 8px;
+  padding: 0.4rem;
+}
+
+.search {
+  flex: 1;
+  max-width: 420px;
+  border: 1px solid #e5ddcd;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  background: #faf7f0;
+}
+
+.user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.user button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 0;
+  background: #f5efe6;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.content {
+  padding: 1.25rem 1.25rem 2.5rem;
+  flex: 1;
+}
+
+.credit {
+  margin-top: auto;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid #e5ddcd;
+  background: #fff;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #8a8172;
+}
+
+.credit a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.credit a:hover {
+  color: #e4b423;
+  text-decoration: underline;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 240px;
+    transform: translateX(-100%);
+    z-index: 50;
+  }
+
+  .open {
+    transform: none;
+  }
+
+  .menu {
+    display: grid;
+  }
+}

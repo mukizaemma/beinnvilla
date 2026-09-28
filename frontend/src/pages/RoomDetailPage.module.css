@@ -1,0 +1,242 @@
+.page {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  background: var(--color-paper);
+}
+
+.others {
+  margin-top: 3rem;
+}
+
+.othersHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+}
+
+.othersHead h2 {
+  margin: 0;
+  flex: 1;
+}
+
+.otherGrid {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 800px) {
+  .otherGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.otherGrid a {
+  display: block;
+  color: var(--color-ink);
+}
+
+.otherGrid img,
+.otherFill {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #1a1613;
+}
+
+.otherGrid strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.top {
+  padding-bottom: 2.5rem;
+}
+
+.crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.crumb a {
+  color: var(--color-text-muted);
+}
+
+.crumb a:hover,
+.crumb span:last-child {
+  color: var(--color-navy);
+}
+
+.layout {
+  display: grid;
+  gap: 1.75rem 2rem;
+  align-items: start;
+}
+
+@media (min-width: 980px) {
+  .layout {
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.72fr);
+  }
+}
+
+.main h1 {
+  margin: 0.15rem 0 0.35rem;
+  color: var(--color-navy);
+}
+
+.kicker {
+  margin: 1.15rem 0 0;
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.price {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.price strong {
+  color: var(--color-gold);
+  font-size: 1.45rem;
+  font-family: var(--font-display);
+}
+
+.note {
+  margin: 0.35rem 0 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.specs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 1.15rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.specs li,
+.features li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-navy);
+  font-size: 0.84rem;
+}
+
+.specs svg,
+.features svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.copy {
+  color: var(--color-text-muted);
+  margin: 0 0 1.25rem;
+  max-width: 40rem;
+}
+
+.main h2 {
+  margin: 0 0 0.7rem;
+  color: var(--color-navy);
+  font-size: 1.15rem;
+}
+
+.features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .features {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.side {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 980px) {
+  .side {
+    position: sticky;
+    top: calc(var(--header-height) + 1rem);
+  }
+}
+
+.back {
+  text-align: center;
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.related {
+  padding: 2.4rem 0 3rem;
+  background: #f6f1e8;
+}
+
+.relatedHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.relatedHead p {
+  margin: 0;
+  color: var(--color-gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.relatedHead h2 {
+  margin: 0.2rem 0 0;
+  color: var(--color-navy);
+}
+
+.relatedHead a {
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.relatedGrid > * {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 860px) {
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,393 @@
+#ireme-back-home {
+  position: fixed;
+  top: 1.15rem;
+  left: 1.15rem;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #111111;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(12, 12, 12, 0.16);
+}
+
+#ireme-back-home:hover {
+  background: #e4b423;
+}
+
+body.ireme-login {
+  min-height: 100vh;
+  --theme-bg: transparent;
+  --theme-bg-color: transparent;
+  --theme-text: #111111;
+  --theme-input-bg: #faf8f3;
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #faf7f0;
+  --theme-elevation-100: #f3ecdd;
+  --theme-elevation-150: #e5ddcd;
+  --theme-elevation-200: #d8cdbe;
+  --theme-elevation-400: #8a8172;
+  --theme-elevation-500: #6b6357;
+  --theme-elevation-800: #111111;
+  --theme-elevation-900: #0c0c0c;
+  --theme-elevation-950: #080808;
+  --theme-elevation-1000: #111111;
+}
+
+body.ireme-login::before,
+body.ireme-login::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+body.ireme-login::before {
+  background: #0c0c0c url('/images/login-hero.jpg') center / cover no-repeat;
+}
+
+body.ireme-login::after {
+  background:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.28) 0%, rgba(12, 12, 12, 0.62) 100%),
+    linear-gradient(105deg, rgba(12, 12, 12, 0.2) 0%, rgba(12, 12, 12, 0.72) 100%);
+}
+
+body.ireme-login #app,
+body.ireme-login .template-minimal,
+body.ireme-login .template-default,
+body.ireme-login .login,
+body.ireme-login .login__wrap {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  color: #111111;
+}
+
+body.ireme-login .template-minimal {
+  min-height: 100vh;
+  padding: 5.5rem 1.25rem 4.5rem;
+}
+
+body.ireme-login .template-minimal__wrap,
+body.ireme-login .login__wrap {
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255, 252, 247, 0.97);
+  border: 1px solid rgba(196, 165, 116, 0.45);
+  border-radius: 20px;
+  box-shadow: 0 28px 60px rgba(10, 18, 34, 0.32);
+  padding: 2.1rem 1.85rem 1.85rem;
+}
+
+body.ireme-login .login__brand {
+  margin-bottom: 0;
+}
+
+body.ireme-login #ireme-login-copy {
+  margin: 0 0 1.35rem;
+  text-align: center;
+  color: #8a8172;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+}
+
+body.ireme-login .login__form,
+body.ireme-login form.login__form {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+body.ireme-login .login__form__inputWrap {
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+body.ireme-login label.field-label,
+body.ireme-login label.field-label:not(.unstyled) {
+  color: #111111 !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.ireme-login .field-type.email input,
+body.ireme-login .field-type.text:not(.has-many) input,
+body.ireme-login .field-type.password input,
+body.ireme-login .field-type.confirm-password input,
+body.ireme-login input[type='email'],
+body.ireme-login input[type='password'],
+body.ireme-login input[type='text'] {
+  height: 48px;
+  border: 1px solid #e5ddcd !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #111111 !important;
+  box-shadow: none !important;
+  padding: 0.7rem 0.85rem;
+}
+
+body.ireme-login .field-type.email input:focus,
+body.ireme-login .field-type.text:not(.has-many) input:focus,
+body.ireme-login .field-type.password input:focus,
+body.ireme-login .field-type.confirm-password input:focus,
+body.ireme-login input:focus {
+  outline: none;
+  border-color: #e4b423 !important;
+  box-shadow: 0 0 0 3px rgba(196, 165, 116, 0.28) !important;
+}
+
+body.ireme-login .login__form a,
+body.ireme-login .forgot-password a,
+body.ireme-login .reset-password a {
+  display: inline-block;
+  margin: 0.15rem 0 1rem;
+  color: #111111 !important;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid #e4b423;
+}
+
+body.ireme-login .login__form a:hover,
+body.ireme-login .forgot-password a:hover,
+body.ireme-login .reset-password a:hover {
+  color: #e4b423 !important;
+}
+
+body.ireme-login .btn,
+body.ireme-login .btn--style-primary,
+body.ireme-login button[type='submit'] {
+  width: 100%;
+  min-height: 48px;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #111111 !important;
+  color: #f7efe2 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: none !important;
+}
+
+body.ireme-login .btn:hover,
+body.ireme-login .btn--style-primary:hover,
+body.ireme-login button[type='submit']:hover {
+  background: #1c1c1c !important;
+  transform: none !important;
+}
+
+body.ireme-login .ireme-admin-footer {
+  background: transparent;
+  border-top: 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.ireme-admin-footer {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  padding: 0.4rem 1.25rem;
+  border-top: 1px solid var(--theme-elevation-150, rgba(255, 255, 255, 0.08));
+  background: var(--theme-elevation-50, #1c1916);
+  color: var(--theme-elevation-700, #c8c0b4);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.ireme-admin-footer a {
+  color: #e4b423;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ireme-admin-footer a:hover {
+  text-decoration: underline;
+}
+
+.template-default #main,
+.collection-edit,
+.global-edit,
+.doc-header,
+.login__form,
+.template-default .content-container {
+  padding-bottom: 3rem;
+}
+
+/* Four short fields per row. Payload admin.width still wins via --field-width. */
+.render-fields > .field-type-text,
+.render-fields > .field-type-number,
+.render-fields > .field-type-email,
+.render-fields > .field-type-date,
+.render-fields > .field-type-select,
+.render-fields > .field-type--text,
+.render-fields > .field-type--number,
+.render-fields > .field-type--select,
+.render-fields > .field-type--date,
+.render-fields > .field-type--email {
+  flex: 0 0 var(--field-width, 25%);
+  max-width: var(--field-width, 25%);
+  width: var(--field-width, 25%);
+}
+
+.render-fields > .field-type-textarea,
+.render-fields > .field-type--textarea {
+  flex: 0 0 var(--field-width, 50%);
+  max-width: var(--field-width, 50%);
+  width: var(--field-width, 50%);
+}
+
+.render-fields > .field-type-richText,
+.render-fields > .field-type-array,
+.render-fields > .field-type-blocks,
+.render-fields > .field-type-json,
+.render-fields > .field-type-ui,
+.render-fields > .field-type-group,
+.render-fields > .field-type-tabs,
+.render-fields > .field-type-collapsible,
+.render-fields > .field-type-row,
+.render-fields > .field-type--richText,
+.render-fields > .field-type--array,
+.render-fields > .field-type--group {
+  flex: 0 0 var(--field-width, 100%);
+  max-width: var(--field-width, 100%);
+  width: var(--field-width, 100%);
+}
+
+.render-fields > .field-type-upload,
+.render-fields > .field-type--upload {
+  flex: 0 0 var(--field-width, 50%);
+  max-width: var(--field-width, 50%);
+  width: var(--field-width, 50%);
+}
+
+.render-fields > .field-type-checkbox,
+.render-fields > .field-type--checkbox {
+  flex: 0 0 var(--field-width, 25%);
+  max-width: var(--field-width, 25%);
+  width: var(--field-width, 25%);
+}
+
+@media (max-width: 1100px) {
+  .render-fields > .field-type-text,
+  .render-fields > .field-type-number,
+  .render-fields > .field-type-email,
+  .render-fields > .field-type-date,
+  .render-fields > .field-type-select,
+  .render-fields > .field-type-checkbox,
+  .render-fields > .field-type--text,
+  .render-fields > .field-type--number,
+  .render-fields > .field-type--select,
+  .render-fields > .field-type--date,
+  .render-fields > .field-type--email,
+  .render-fields > .field-type--checkbox {
+    flex-basis: min(50%, var(--field-width, 50%));
+    max-width: min(50%, var(--field-width, 50%));
+    width: min(50%, var(--field-width, 50%));
+  }
+}
+
+.hero-headline .field-label,
+.hero-headline label,
+.hero-headline .render-label {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+.hero-headline input {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.hero-cta-card {
+  border: 1px solid var(--theme-elevation-150, #e5ddcd);
+  border-radius: 10px;
+  padding: 0.85rem 0.9rem 0.95rem;
+  background: var(--theme-elevation-50, #faf7f0);
+  box-sizing: border-box;
+}
+
+.hero-cta-card > .field-label,
+.hero-cta-card > label {
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+
+.hero-cta-card .render-fields > .field-type-text,
+.hero-cta-card .render-fields > .field-type--text {
+  flex: 0 0 var(--field-width, 50%) !important;
+  max-width: var(--field-width, 50%) !important;
+  width: var(--field-width, 50%) !important;
+}
+
+.field-type-collapsible {
+  border-color: var(--theme-elevation-150, #e5ddcd);
+}
+
+/* Hide Payload file-details list when the custom field is not used. */
+.hero-image-upload .upload-relationship-details {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.hero-image-upload .upload-relationship-details__imageAndDetails {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-image-upload .upload-relationship-details__details,
+.hero-image-upload .file-meta,
+.hero-image-upload .file-details__meta {
+  display: none !important;
+}
+
+.hero-image-upload .upload-relationship-details__thumbnail,
+.hero-image-upload .upload-relationship-details__thumbnail img,
+.hero-image-upload .thumbnail {
+  width: 220px !important;
+  height: 140px !important;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.hero-image-upload .upload-relationship-details__actions {
+  width: 220px;
+  justify-content: stretch;
+}
+
+.ireme-form-save {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .render-fields > .field-type-text,
+  .render-fields > .field-type-number,
+  .render-fields > .field-type-email,
+  .render-fields > .field-type-date,
+  .render-fields > .field-type-select,
+  .render-fields > .field-type-checkbox,
+  .render-fields > .field-type--text,
+  .render-fields > .field-type--number,
+  .render-fields > .field-type--select,
+  .render-fields > .field-type--date,
+  .render-fields > .field-type--email,
+  .render-fields > .field-type--checkbox {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+}

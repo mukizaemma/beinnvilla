@@ -1,0 +1,15 @@
+export const FEATURE_LIBRARY = {
+  tv: 'Flat-Screen TV',
+  wifi: 'Free Wi-Fi',
+  ac: 'Air Conditioning',
+  safe: 'In-Room Safe',
+  alarm: 'Alarm Clock',
+  phone: 'Direct Phone Line',
+  bath: 'Private Bathroom',
+  sofa: 'Sitting Area',
+  fridge: 'Mini Fridge',
+  kitchen: 'Full kitchen',
+  'hot-water': 'Hot water',
+  'private-bar': 'Private in-house bar',
+  boat: 'Boat ride for in-house guests',
+}

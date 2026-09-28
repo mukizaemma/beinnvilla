@@ -1,0 +1,66 @@
+.section {
+  background: #ffffff;
+  padding-block: var(--space-2xl);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+  margin-bottom: var(--space-xs);
+}
+
+.headline {
+  font-size: var(--fs-h1);
+  color: var(--color-charcoal);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg) var(--space-xl);
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.icon {
+  color: var(--color-terracotta);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.itemTitle {
+  font-size: 1.05rem;
+  color: var(--color-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.itemDescription {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: var(--lh-body);
+}

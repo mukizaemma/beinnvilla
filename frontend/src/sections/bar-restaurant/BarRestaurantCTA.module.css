@@ -1,0 +1,35 @@
+.section {
+  background: var(--color-lake-teal-deep);
+  padding-block: var(--space-2xl);
+  text-align: center;
+}
+
+.headline {
+  font-size: var(--fs-h1);
+  color: var(--color-sand);
+  margin-bottom: var(--space-sm);
+}
+
+.body {
+  font-size: 0.95rem;
+  color: var(--color-sand-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.ctaBtn {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-lake-teal-deep);
+  background: var(--color-gold);
+  padding: 0.95rem 2.4rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(212, 175, 106, 0.35);
+}

@@ -1,0 +1,86 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: var(--space-sm);
+}
+
+.fieldLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.field input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.7rem;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-terracotta);
+}
+
+.field input:disabled {
+  background: var(--color-sand);
+  opacity: 0.7;
+}
+
+.requestBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ffcb05; /* MTN brand yellow */
+  color: #1a1a1a;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-base);
+}
+
+.requestBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--color-hillside-green);
+  margin-top: var(--space-sm);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #7a2e1e;
+  background: rgba(200, 100, 74, 0.12);
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-sm);
+}
+
+.error p {
+  margin: 0;
+}
+
+.switchBtn {
+  margin-top: 0.55rem;
+  border: 1px solid #c88b4a;
+  background: #fff;
+  color: #7a2e1e;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}

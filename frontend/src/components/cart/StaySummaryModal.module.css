@@ -1,0 +1,156 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 260; /* above the floating bar (250) */
+  background: rgba(21, 48, 46, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.modal {
+  width: 100%;
+  max-width: 32rem;
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+}
+
+.title {
+  font-size: var(--fs-h3);
+  color: var(--color-lake-teal);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.clearAll {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b1442e;
+}
+
+.closeBtn {
+  color: var(--color-charcoal);
+  display: flex;
+}
+
+.roomCount {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding: 0 var(--space-md) var(--space-sm);
+}
+
+.list {
+  overflow-y: auto;
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.roomCard {
+  position: relative;
+  background: var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+}
+
+.roomCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.roomLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-hillside-green);
+}
+
+.removeBtn {
+  color: #b1442e;
+  display: flex;
+}
+
+.roomName {
+  font-size: 1rem;
+  color: var(--color-lake-teal);
+  margin-bottom: 0.3rem;
+}
+
+.datesNote {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-terracotta);
+  margin-bottom: 0.3rem;
+}
+
+.guests {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.roomPrice {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-lake-teal);
+  text-align: right;
+}
+
+.footer {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.grandTotalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.grandTotalValue {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-lake-teal);
+}
+
+.continueBtn {
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background: var(--color-hillside-green);
+  padding: 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-base);
+}
+
+.continueBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

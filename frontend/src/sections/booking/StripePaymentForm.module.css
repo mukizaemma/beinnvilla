@@ -1,0 +1,44 @@
+.payBtn {
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-lake-teal);
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-md);
+  transition: opacity var(--transition-base);
+}
+
+.payBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #7a2e1e;
+  background: rgba(200, 100, 74, 0.12);
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-sm);
+}
+
+.error p {
+  margin: 0;
+}
+
+.switchBtn {
+  margin-top: 0.55rem;
+  border: 1px solid #c88b4a;
+  background: #fff;
+  color: #7a2e1e;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}

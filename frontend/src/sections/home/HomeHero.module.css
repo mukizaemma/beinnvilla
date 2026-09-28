@@ -1,0 +1,205 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+
+}
+
+/* Navbar is now global — see @components/layout/Navbar, rendered by Layout with hasHero=true on this page */
+
+.slidesViewport {
+  position: absolute;
+  inset: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.slideImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: scale(1);
+}
+
+.slideImageActive {
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.kenBurns0.slideImageActive {
+  animation-name: kenBurnsZoomPanLeft;
+}
+
+.kenBurns1.slideImageActive {
+  animation-name: kenBurnsZoomPanRight;
+}
+
+.kenBurns2.slideImageActive {
+  animation-name: kenBurnsZoomCenter;
+}
+
+@keyframes kenBurnsZoomPanLeft {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+
+  to {
+    transform: scale(1.12) translate(-2.5%, -1.5%);
+  }
+}
+
+@keyframes kenBurnsZoomPanRight {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+
+  to {
+    transform: scale(1.12) translate(2.5%, -1.5%);
+  }
+}
+
+@keyframes kenBurnsZoomCenter {
+  from {
+    transform: scale(1.02) translate(0, 0);
+  }
+
+  to {
+    transform: scale(1.15) translate(0, -1%);
+  }
+}
+
+.slideContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  text-align: left;
+  padding: 0 8vw;
+  max-width: 46rem;
+}
+
+.slideActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  padding: 0.85rem 1.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.primaryBtn {
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.secondaryBtn {
+  background: #fff;
+  color: var(--color-navy);
+}
+
+.slideKicker {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--color-gold, #d4af6a);
+  margin-bottom: 0.9rem;
+}
+
+.slideTitle {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--color-sand, #f5efe6);
+  margin: 0 0 0.75rem;
+  line-height: 1.15;
+}
+
+.slideDescription {
+  font-size: 0.9rem;
+  color: var(--color-sand-muted, #d8cdbe);
+  max-width: 26rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.foamOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  
+}
+
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 239, 230, 0.5);
+  background: rgba(21, 48, 46, 0.4);
+  color: var(--color-sand, #f5efe6);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrowBtn:hover {
+  background: rgba(21, 48, 46, 0.65);
+}
+
+.prevBtn {
+  left: 1.25rem;
+}
+
+.nextBtn {
+  right: 1.25rem;
+}
+
+.dots {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 6;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 239, 230, 0.35);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.dotActive {
+  background: var(--color-gold, #d4af6a);
+}

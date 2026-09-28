@@ -1,0 +1,115 @@
+.card {
+  position: sticky;
+  top: var(--space-lg);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.header {
+  background: var(--color-hillside-green);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.body {
+  padding: var(--space-md);
+}
+
+.dates {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.emptyNote {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  padding: var(--space-sm) 0;
+}
+
+.roomList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.roomLine {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+
+.roomLineTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roomName {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-lake-teal);
+}
+
+.removeLink {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #b1442e;
+}
+
+.roomMeta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 0.15rem 0;
+}
+
+.roomPrice {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.addExperienceBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-terracotta);
+  border: 1px dashed var(--color-terracotta);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem;
+}
+
+.footer {
+  background: var(--color-sand);
+  padding: var(--space-md);
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.totalValue {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-lake-teal);
+}
+
+.discountNote {
+  font-size: 0.72rem;
+  color: var(--color-hillside-green);
+  font-weight: 600;
+}

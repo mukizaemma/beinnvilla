@@ -1,0 +1,611 @@
+.staffPage h1 {
+  margin: 0 0 1rem;
+  font-size: 1.45rem;
+  color: #111111;
+}
+
+.staffLead {
+  color: #8a8172;
+  margin: -0.35rem 0 1rem;
+  max-width: 42rem;
+}
+
+.staffCheck {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.staffCheckRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  margin-top: 0.45rem;
+}
+
+.formGrid fieldset.staffField {
+  border: 1px solid #eee6d8;
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem 0.9rem;
+  margin: 0;
+}
+
+.formGrid fieldset.staffField legend {
+  padding: 0 0.3rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #8a8172;
+}
+
+.staffNested {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.75rem 0.7rem;
+  padding: 0.85rem;
+  border: 1px solid #eee6d8;
+  border-radius: 10px;
+  background: #faf7f0;
+}
+
+.staffNested .full {
+  grid-column: 1 / -1;
+}
+
+.staffPanel {
+  grid-column: 1 / -1;
+  border: 1px solid #eee6d8;
+  border-radius: 12px;
+  background: #faf7f0;
+  padding: 0 1rem 1rem;
+}
+
+.staffPanel > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #8a8172;
+  padding: 0.9rem 0 0.7rem;
+  border-bottom: 1px solid #eee6d8;
+  margin-bottom: 0.85rem;
+}
+
+.staffPanel > summary::-webkit-details-marker {
+  display: none;
+}
+
+.staffPanelBody {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.75rem 0.7rem;
+}
+
+.staffPanelBody > .staffField {
+  grid-column: span 3;
+}
+
+.staffPanelBody > .staffField.col-9,
+.staffPanelBody > .headlineField {
+  grid-column: span 9;
+}
+
+.staffPanelBody > .staffField.full,
+.staffPanelBody > .full {
+  grid-column: 1 / -1;
+}
+
+.staffField.headlineField {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #111111;
+}
+
+.headlineField input {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.staffBtnPair {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.staffBtnCard {
+  border: 1px solid #eee6d8;
+  border-radius: 10px;
+  padding: 0.85rem;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.staffBtnCardTitle {
+  grid-column: 1 / -1;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #8a8172;
+}
+
+.staffBtnCard .staffField {
+  grid-column: auto;
+}
+
+.staffThumb {
+  width: 44px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f5efe6;
+  display: block;
+}
+
+.staffThumbEmpty {
+  display: block;
+  width: 44px;
+  height: 32px;
+  border-radius: 6px;
+  background: #f5efe6;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+}
+
+.detailGrid p {
+  margin: 0;
+}
+
+.detailGrid .full {
+  grid-column: 1 / -1;
+}
+
+.staffToolbar {
+  background: #fff;
+  border: 1px solid #e5ddcd;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.staffField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.staffField input,
+.staffField textarea,
+.staffField select {
+  font-weight: 400;
+  border: 1px solid #e5ddcd;
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  min-width: 0;
+  width: 100%;
+  background: #fff;
+}
+
+.staffField textarea {
+  min-height: 110px;
+  width: 100%;
+}
+
+.staffBtn {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #e4b423;
+  color: #111111;
+}
+
+label.staffBtn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.staffBtnGhost {
+  background: #f5efe6;
+  color: #15302e;
+}
+
+.staffBtnDanger {
+  background: #b42318;
+  color: #fff;
+}
+
+.staffStats {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(7.5rem, 1fr);
+  gap: 0;
+  margin-bottom: 1.15rem;
+  background: #fff;
+  border: 1px solid #e8dfd0;
+  border-radius: 14px;
+  overflow: auto hidden;
+  box-shadow: 0 10px 28px rgba(26, 43, 75, 0.06);
+}
+
+.staffStat {
+  padding: 1.15rem 1.3rem 1.2rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  min-width: 0;
+}
+
+.staffStat + .staffStat {
+  border-left: 1px solid #eee6d8;
+}
+
+.staffStat span {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8172;
+}
+
+.staffStat strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 1.55rem;
+  line-height: 1.15;
+  color: #111111;
+}
+
+.staffStat small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #e4b423;
+  font-weight: 600;
+}
+
+.staffStat--accent {
+  background: linear-gradient(160deg, #1c1c1c 0%, #111111 100%);
+}
+
+.staffStat--accent span {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.staffStat--accent strong {
+  color: #e8c992;
+}
+
+.staffStat--accent small {
+  color: #e4b423;
+}
+
+.staffCard {
+  background: #fff;
+  border: 1px solid #e5ddcd;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+.staffTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.staffTable th,
+.staffTable td {
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid #f0e9dc;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.staffTable th {
+  background: #faf7f0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #8a8172;
+}
+
+.staffTable tfoot td {
+  background: #111111;
+  color: #fff;
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.badgeConfirmed {
+  background: #e5f4ea;
+  color: #1b7a3a;
+}
+
+.badgePending {
+  background: #eee;
+  color: #555;
+}
+
+.badgeCancelled {
+  background: #fde8e6;
+  color: #b42318;
+}
+
+.rowActions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.iconView {
+  background: #c88b4a;
+  color: #fff;
+}
+
+.iconDelete {
+  background: #b42318;
+  color: #fff;
+}
+
+.pageSwitcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #eee6d8;
+}
+
+.pageSwitcher button {
+  border: 1px solid #eee6d8;
+  background: #fff;
+  color: #111111;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pageSwitcher button:hover,
+.pageSwitcher button.is-active {
+  border-color: #e4b423;
+  background: #e4b423;
+  color: #111111;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.75rem 0.7rem;
+}
+
+.formGrid > .staffField,
+.staffNested > .staffField {
+  grid-column: span 3;
+}
+
+.formGrid > .staffField.col-3,
+.staffNested > .staffField.col-3,
+.col-3 { grid-column: span 3; }
+
+.formGrid > .staffField.col-4,
+.staffNested > .staffField.col-4,
+.col-4 { grid-column: span 4; }
+
+.formGrid > .staffField.col-6,
+.staffNested > .staffField.col-6,
+.col-6 { grid-column: span 6; }
+
+.formGrid > .staffField.col-8,
+.staffNested > .staffField.col-8,
+.col-8 { grid-column: span 8; }
+
+.formGrid > .staffField.col-9,
+.staffNested > .staffField.col-9,
+.col-9 { grid-column: span 9; }
+
+.formGrid > .mediaSlot,
+.staffNested > .mediaSlot,
+.mediaSlot { grid-column: span 4; }
+
+.formGrid > .staffField.full,
+.formGrid .full,
+.staffNested .full {
+  grid-column: 1 / -1;
+}
+
+.staffCredit {
+  margin-top: auto;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid #e5ddcd;
+  background: #fff;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #8a8172;
+}
+
+.staffCredit a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.staffCredit a:hover {
+  color: #e4b423;
+  text-decoration: underline;
+}
+
+.staffLoginCredit {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 0.85rem;
+  font-size: 0.75rem;
+  color: #8a8172;
+}
+
+.staffLoginCredit a {
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.staffLoginCredit a:hover {
+  color: #e4b423;
+  text-decoration: underline;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 0.6rem;
+  font-weight: 400;
+}
+
+.preferredNote {
+  background: rgba(196, 165, 116, 0.14);
+  border: 1px solid #e4b423;
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+}
+
+.commThread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  max-height: 16rem;
+  overflow: auto;
+}
+
+.commMsg {
+  background: #f7f5f1;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+.commMsg--outbound {
+  background: rgba(26, 43, 75, 0.08);
+}
+
+.commMsg--inbound {
+  background: rgba(196, 165, 116, 0.16);
+}
+
+.commMsg header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+  color: #8a8172;
+  font-size: 0.72rem;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid #eee6d8;
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+@media (max-width: 800px) {
+
+  .formGrid > .staffField,
+  .staffNested > .staffField,
+  .col-3,
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-9 {
+    grid-column: span 6;
+  }
+
+  .staffBtnPair {
+    grid-template-columns: 1fr;
+  }
+
+  .mediaSlot {
+    grid-column: span 6;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.printOnly {
+  display: none;
+}
+
+@media print {
+  .noPrint,
+  .staffToolbar,
+  .formActions,
+  .rowActions {
+    display: none !important;
+  }
+
+  .printOnly {
+    display: inline;
+  }
+}
+
+@media (max-width: 560px) {
+  .staffNested {
+    grid-template-columns: 1fr;
+  }
+
+  .formGrid > .staffField,
+  .staffNested > .staffField,
+  .col-3,
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-9,
+  .mediaSlot {
+    grid-column: 1 / -1;
+  }
+}
+

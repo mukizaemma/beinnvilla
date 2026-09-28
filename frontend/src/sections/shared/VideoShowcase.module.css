@@ -1,0 +1,152 @@
+.section {
+  position: relative;
+  min-height: 420px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 24, 26, 0.4);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.headline {
+  font-size: var(--fs-h1);
+  color: var(--color-sand);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Play button ────────────────────────────────────────── */
+
+.playBtn {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-lake-teal-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+.playBtn:hover {
+  transform: scale(1.08);
+}
+
+.playIcon {
+  position: relative;
+  z-index: 1;
+  margin-left: 3px;
+}
+
+.playRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  animation: ringPulse 2.6s ease-out infinite;
+}
+
+.playRing:nth-child(2) {
+  animation-delay: 1.3s;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playRing {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ── Modal ──────────────────────────────────────────────── */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: rgba(8, 16, 18, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.modalBox {
+  position: relative;
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 9;
+  background: var(--color-lake-teal-deep);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalClose {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  color: var(--color-sand);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+}
+
+.comingSoon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.comingSoonIcon {
+  color: var(--color-gold);
+}
+
+.comingSoonText {
+  color: var(--color-sand-muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,147 @@
+.section {
+  background: #fff;
+  padding-block: var(--space-2xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.header {
+  text-align: center;
+  max-width: 38rem;
+  margin: 0 auto var(--space-xl);
+}
+
+.eyebrow {
+  display: block;
+  color: var(--color-gold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.header h2 {
+  color: var(--color-navy);
+  font-size: var(--fs-h1);
+  letter-spacing: 0.03em;
+}
+
+.intro {
+  margin-top: 0.7rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: 960px;
+  margin: 0 auto var(--space-xl);
+}
+
+@media (min-width: 700px) {
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+.feature {
+  text-align: center;
+  padding: 0.4rem 0.6rem;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 50%;
+  background: rgba(196, 165, 116, 0.14);
+  color: var(--color-navy);
+  margin-bottom: 0.85rem;
+}
+
+.feature h3 {
+  color: var(--color-navy);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.feature p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.gallery {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: var(--space-xl);
+}
+
+.count1 {
+  grid-template-columns: 1fr;
+}
+
+.count2,
+.count3,
+.count4 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 800px) {
+  .count3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .count4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.photo {
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-navy);
+  aspect-ratio: 4 / 3;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s var(--ease-luxury);
+}
+
+.photo:hover img {
+  transform: scale(1.05);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 12rem;
+  padding: 0.9rem 1.6rem;
+  background: var(--color-navy);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.cta:hover {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}

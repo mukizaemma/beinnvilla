@@ -1,0 +1,168 @@
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 5.5rem 1.25rem 4.5rem;
+  position: relative;
+  background: #0c0c0c url('/images/login-hero.jpg') center / cover no-repeat;
+}
+
+.wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.28) 0%, rgba(12, 12, 12, 0.62) 100%),
+    linear-gradient(105deg, rgba(12, 12, 12, 0.2), rgba(12, 12, 12, 0.72));
+}
+
+.back,
+.card,
+.credit {
+  position: relative;
+  z-index: 1;
+}
+
+.back {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #111111;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.back:hover {
+  background: #e4b423;
+}
+
+.card {
+  width: min(420px, 100%);
+  background: rgba(255, 252, 247, 0.97);
+  border: 1px solid rgba(228, 180, 35, 0.55);
+  border-radius: 20px;
+  padding: 2.15rem 1.85rem 1.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  box-shadow: 0 28px 60px rgba(10, 18, 34, 0.32);
+}
+
+.logo {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 1px solid #e4b423;
+  padding: 7px;
+  background: #fff;
+  margin: 0 auto;
+}
+
+.card h1 {
+  margin: 0;
+  text-align: center;
+  color: #111111;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.7rem;
+}
+
+.card p {
+  margin: -0.35rem 0 0.35rem;
+  text-align: center;
+  color: #8a8172;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+}
+
+.card label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.card input {
+  height: 48px;
+  border: 1px solid #e5ddcd;
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  background: #fff;
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #e4b423;
+  box-shadow: 0 0 0 3px rgba(196, 165, 116, 0.28);
+}
+
+.forgot {
+  align-self: flex-start;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #111111;
+  text-decoration: none;
+  border-bottom: 1px solid #e4b423;
+}
+
+.forgot:hover {
+  color: #e4b423;
+}
+
+.card button {
+  margin-top: 0.15rem;
+  border: 0;
+  min-height: 48px;
+  background: #111111;
+  color: #f7efe2;
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.card button:hover:not(:disabled) {
+  background: #243658;
+}
+
+.card button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.error {
+  color: #b42318 !important;
+}
+
+.note {
+  color: #4a6b5a !important;
+}
+
+.credit {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.85rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.credit a {
+  color: #e4b423;
+  font-weight: 700;
+}

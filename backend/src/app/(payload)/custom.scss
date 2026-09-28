@@ -1,0 +1,152 @@
+/* ─────────────────────────────────────────────────────────
+   Grand Villa — Payload Admin Theme
+   Brand tokens pulled from the frontend (src/styles/variables.css):
+   Lake Kivu teal, sand/ivory, terracotta, gold, charcoal.
+   ───────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Playfair+Display:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap');
+
+@layer payload-default {
+  :root {
+    /* ── Base surface scale: ivory → charcoal (was gray → black) ── */
+    --color-base-0: #faf7f0;
+    --color-base-50: #f3ecdd;
+    --color-base-100: #ebe1cc;
+    --color-base-150: #e5ddcd;
+    --color-base-200: #d8cdbe;
+    --color-base-250: #c9bda9;
+    --color-base-300: #b7a891;
+    --color-base-350: #a5947c;
+    --color-base-400: #8a8172;
+    --color-base-450: #7a7164;
+    --color-base-500: #6b6357;
+    --color-base-550: #5c5548;
+    --color-base-600: #4e483c;
+    --color-base-650: #423d33;
+    --color-base-700: #38332a;
+    --color-base-750: #2f2b23;
+    --color-base-800: #2b2b28;
+    --color-base-850: #221f1a;
+    --color-base-900: #171310;
+    --color-base-950: #0d0b09;
+    --color-base-1000: #000000;
+
+    /* ── Accent scale: gold/terracotta stands in for Payload's "success" ── */
+    --color-success-50: #faf3e6;
+    --color-success-100: #f3e5cb;
+    --color-success-150: #ecd7ae;
+    --color-success-200: #e4c690;
+    --color-success-250: #ddb877;
+    --color-success-300: #d4af6a;
+    --color-success-350: #cca25c;
+    --color-success-400: #c88b4a;
+    --color-success-450: #bb8143;
+    --color-success-500: #a8763d;
+    --color-success-550: #966a37;
+    --color-success-600: #855f31;
+    --color-success-650: #73532a;
+    --color-success-700: #634823;
+    --color-success-750: #533c1d;
+    --color-success-800: #453118;
+    --color-success-850: #362713;
+    --color-success-900: #281c0e;
+    --color-success-950: #1a1209;
+
+    /* ── Typography ── */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Fraunces', Georgia, serif;
+
+    /* ── Softer, more premium corners ── */
+    --style-radius-s: 4px;
+    --style-radius-m: 8px;
+    --style-radius-l: 14px;
+
+    /* Brand refs available to any selector below */
+    --gv-teal: #15302e;
+    --gv-teal-soft: #1b3a3e;
+    --gv-gold: #d4af6a;
+    --gv-terracotta: #c88b4a;
+    --gv-sand: #f5efe6;
+    --gv-charcoal: #2b2b28;
+  }
+
+  /* ── Headings take the display face ── */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Dashboard ── */
+  .dashboard {
+    background: var(--gv-sand);
+  }
+
+  .dashboard__label,
+  .dashboard__group-label {
+    font-family: var(--font-serif);
+    font-weight: 500;
+  }
+
+  /* ── Primary buttons in terracotta, not default blue ── */
+  .btn--style-primary {
+    background: var(--gv-terracotta) !important;
+    border-color: var(--gv-terracotta) !important;
+    color: #fff !important;
+    border-radius: var(--style-radius-m);
+    box-shadow: 0 2px 8px rgba(43, 43, 40, 0.15);
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn--style-primary:hover {
+    background: #a8763d !important;
+    border-color: #a8763d !important;
+    transform: translateY(-1px);
+  }
+
+  .btn--style-secondary {
+    border-color: var(--gv-teal) !important;
+    color: var(--gv-teal) !important;
+    border-radius: var(--style-radius-m);
+  }
+
+  /* ── Sidebar nav: deep lake teal with gold accents ──
+     Best-effort: `.nav` is Payload's long-standing sidebar block class.
+     If your build uses a different class, tell me what you see in
+     devtools and I'll retarget this section precisely. */
+  .nav {
+    background: var(--gv-teal);
+    color: var(--gv-sand);
+  }
+
+  .nav a,
+  .nav__link,
+  .nav-group__label {
+    color: var(--gv-sand) !important;
+  }
+
+  .nav a:hover,
+  .nav__link:hover {
+    color: var(--gv-gold) !important;
+  }
+
+  .nav__link--active,
+  .nav a[aria-current='true'] {
+    color: var(--gv-gold) !important;
+    font-weight: 600;
+  }
+
+  .login .btn--style-primary {
+    width: 100%;
+  }
+
+  /* ── Selection color follows the new accent automatically via
+       --color-success-250, but nudge it slightly for contrast ── */
+  ::selection {
+    background: var(--color-success-150);
+  }
+}

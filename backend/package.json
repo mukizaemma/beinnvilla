@@ -1,0 +1,32 @@
+{
+  "name": "beinnvilla-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbo --no-server-fast-refresh",
+    "build": "next build",
+    "start": "next start",
+    "payload": "payload",
+    "create-admin": "node --env-file=.env scripts/create-admin.js"
+  },
+  "dependencies": {
+    "@payloadcms/db-mongodb": "3.86.0",
+    "@payloadcms/email-nodemailer": "^3.86.0",
+    "@payloadcms/email-resend": "^3.86.0",
+    "@payloadcms/next": "3.86.0",
+    "@payloadcms/richtext-lexical": "3.86.0",
+    "@payloadcms/ui": "3.86.0",
+    "graphql": "16.14.2",
+    "next": "16.2.12",
+    "nodemailer": "^9.0.5",
+    "payload": "3.86.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sharp": "0.35.3",
+    "stripe": "^22.4.0"
+  },
+  "devDependencies": {
+    "sass": "^1.83.0"
+  }
+}

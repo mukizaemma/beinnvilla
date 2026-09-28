@@ -1,0 +1,22 @@
+.wrap :global(.note-editor) {
+  font-weight: 400;
+  border: 1px solid #e5ddcd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wrap :global(.note-toolbar) {
+  background: #faf7f0;
+  border-bottom: 1px solid #eee6d8;
+}
+
+.wrap :global(.note-editable) {
+  background: #fff;
+}
+
+.wrap :global(.note-popover),
+.wrap :global(.note-dropdown-menu),
+:global(.note-modal),
+:global(.note-link-popover) {
+  z-index: 520;
+}

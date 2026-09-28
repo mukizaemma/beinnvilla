@@ -1,0 +1,36 @@
+.section {
+  background: #f7f5f1;
+  padding-block: var(--space-2xl);
+}
+
+.wide {
+  max-width: min(var(--container-width), 100%);
+}
+
+.header {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto var(--space-xl);
+}
+
+.eyebrow {
+  display: block;
+  color: var(--color-gold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.header h2 {
+  color: var(--color-navy);
+  font-size: var(--fs-h1);
+  letter-spacing: 0.02em;
+}
+
+.intro {
+  margin-top: 0.7rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}

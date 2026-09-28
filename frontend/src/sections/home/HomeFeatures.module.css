@@ -1,0 +1,43 @@
+.section {
+  background: #f7f5f1;
+  padding-block: var(--space-xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.item {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.item svg {
+  color: var(--color-gold);
+  margin-inline: auto;
+}
+
+.item h3 {
+  margin: 0.7rem 0 0.35rem;
+  color: var(--color-navy);
+  font-size: 1.05rem;
+}
+
+.item p {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}

@@ -1,0 +1,14 @@
+.wrap {
+  min-height: 70vh;
+}
+
+.back {
+  text-align: center;
+  margin-top: -2rem;
+  padding-bottom: 3rem;
+}
+
+.back a {
+  color: var(--color-lake-teal);
+  font-weight: 600;
+}

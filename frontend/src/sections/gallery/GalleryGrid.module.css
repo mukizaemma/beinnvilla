@@ -1,0 +1,166 @@
+.section {
+  scroll-margin-top: var(--header-height);
+  background: var(--color-paper);
+  padding-block: 1.25rem 3rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-stone);
+  padding-block: 2rem;
+}
+
+.frame {
+  width: 90%;
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.tile {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #1c1815;
+  cursor: zoom-in;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+}
+
+.pager button {
+  min-width: 2.4rem;
+  min-height: 2.4rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.pager button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pageOn {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ── Lightbox ───────────────────────────────────────────── */
+
+.lightboxOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: rgba(8, 12, 12, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.lightboxClose {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 2;
+  color: var(--color-sand);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightboxArrow {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base);
+}
+
+.lightboxArrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightboxStage {
+  position: relative;
+  width: min(900px, 78vw);
+  height: min(600px, 74vh);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-inline: var(--space-sm);
+}
+
+.lightboxImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+}
+
+.lightboxImageActive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lightboxCaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-sand);
+  background: linear-gradient(0deg, rgba(8, 12, 12, 0.7) 0%, transparent 100%);
+}
+
+@media (max-width: 640px) {
+  .lightboxStage {
+    width: 82vw;
+    height: 50vh;
+  }
+
+  .lightboxArrow {
+    width: 36px;
+    height: 36px;
+  }
+}

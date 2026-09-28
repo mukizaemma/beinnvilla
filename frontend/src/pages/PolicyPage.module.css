@@ -1,0 +1,53 @@
+.section {
+  padding-block: var(--space-xl);
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-md);
+  color: var(--color-muted, #6b6258);
+}
+
+.breadcrumb a {
+  color: inherit;
+}
+
+.kicker {
+  margin-bottom: 0.4rem;
+  color: var(--color-ember);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headline {
+  font-size: clamp(3rem, 7vw, 5rem);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+}
+
+.lede {
+  max-width: 40rem;
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+}
+
+.body {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  line-height: 1.65;
+}
+
+.body h2 {
+  font-size: var(--fs-h3, 1.25rem);
+  color: var(--color-ink);
+  margin-bottom: 0.25rem;
+}

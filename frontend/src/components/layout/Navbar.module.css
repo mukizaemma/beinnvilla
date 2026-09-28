@@ -1,0 +1,142 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  height: var(--header-height);
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.transparent {
+  background: rgba(14, 14, 14, 0.42);
+}
+
+.solid {
+  background: var(--color-ink);
+  box-shadow: none;
+  border-bottom: 1px solid rgba(243, 238, 230, 0.12);
+}
+
+.inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  background: #1b9a43;
+}
+
+.mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--color-ember);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: -0.04em;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.wordmark strong {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wordmark small {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+  margin-left: auto;
+  padding-left: 2rem;
+}
+
+@media (min-width: 1080px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.navLink:hover,
+.activeLink {
+  color: #fff;
+}
+
+.activeLink {
+  color: var(--color-ember);
+}
+
+.ctaBtn {
+  display: none;
+  margin-left: 0.45rem;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-ember);
+  padding: 0.72rem 1.15rem;
+  flex-shrink: 0;
+}
+
+.ctaBtn:hover {
+  background: #158a38;
+  color: #fff;
+}
+
+.menuToggle {
+  display: flex;
+  margin-left: auto;
+  color: #fff;
+  padding: 0.4rem;
+}
+
+@media (min-width: 1080px) {
+  .menuToggle {
+    display: none;
+  }
+
+  .ctaBtn {
+    display: inline-flex;
+    align-items: center;
+  }
+}

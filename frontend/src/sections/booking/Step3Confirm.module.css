@@ -1,0 +1,260 @@
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.headingIcon {
+  color: var(--color-hillside-green);
+}
+
+.title {
+  font-size: var(--fs-h3);
+  color: var(--color-lake-teal);
+}
+
+.reviewList {
+  border-top: 1px solid var(--color-border);
+  margin-bottom: var(--space-lg);
+}
+
+.reviewRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+.reviewRow dt {
+  color: var(--color-text-muted);
+}
+
+.reviewRow dd {
+  color: var(--color-charcoal);
+  font-weight: 600;
+  text-align: right;
+}
+
+.reviewTotal {
+  color: var(--color-lake-teal);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.sectionLabel {
+  font-size: 0.85rem;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.methodRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.methodCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+}
+
+.methodCardActive {
+  border-color: var(--color-hillside-green);
+  color: var(--color-hillside-green);
+  background: rgba(74, 107, 90, 0.08);
+}
+
+.methodNote {
+  font-size: 0.78rem;
+  color: var(--color-hillside-green);
+  margin-bottom: var(--space-md);
+}
+
+.termsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: var(--space-md) 0;
+}
+
+.termsRow input {
+  margin-top: 0.2rem;
+}
+
+.termsRow a {
+  color: var(--color-lake-teal);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.confirmBtn {
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--color-terracotta);
+  padding: 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-base);
+}
+
+.confirmBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.statusError {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #7a2e1e;
+  background: rgba(200, 100, 74, 0.12);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-sm);
+}
+
+.statusErrorBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.statusErrorBody p {
+  margin: 0;
+}
+
+.switchMethodBtn {
+  border: 1px solid #c88b4a;
+  background: #fff;
+  color: #7a2e1e;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.paymentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  scroll-margin-top: 1rem;
+}
+
+@media (min-width: 480px) {
+  .paymentGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.methodCard:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paymentPanel {
+  background: var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Success state ──────────────────────────────────────── */
+
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-lg) 0;
+}
+
+.successIcon {
+  color: var(--color-hillside-green);
+  margin-bottom: var(--space-sm);
+}
+
+.successTitle {
+  font-size: 1.2rem;
+  color: var(--color-lake-teal);
+  margin-bottom: 0.4rem;
+}
+
+.successText {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  max-width: 26rem;
+  margin-bottom: var(--space-md);
+}
+
+.wuBox {
+  width: 100%;
+  max-width: 26rem;
+  background: var(--color-sand);
+  border: 1px dashed var(--color-terracotta);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  text-align: left;
+}
+
+.wuTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.wuText {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.wuReference {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-lake-teal);
+}
+
+.doneBtn {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2c1608;
+  background: var(--color-terracotta);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+}

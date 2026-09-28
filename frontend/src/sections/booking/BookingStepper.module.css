@@ -1,0 +1,68 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  max-width: 26rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.stepWrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.stepWrap:last-child {
+  flex: 0 0 auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-border);
+}
+
+.circleActive,
+.circleComplete {
+  color: #ffffff;
+  background: var(--color-hillside-green);
+}
+
+.label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.labelActive {
+  color: var(--color-hillside-green);
+  font-weight: 600;
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  background: var(--color-border);
+  margin: 0 0.5rem;
+  margin-bottom: 1.4rem; /* aligns with the circle's vertical center */
+}
+
+.connectorComplete {
+  background: var(--color-hillside-green);
+}

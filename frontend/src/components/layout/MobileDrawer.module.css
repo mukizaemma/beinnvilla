@@ -1,0 +1,69 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: rgba(15, 30, 29, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(80vw, 320px);
+  background: var(--color-lake-teal);
+  padding: var(--space-lg) var(--space-md);
+  transform: translateX(100%);
+  transition: transform var(--transition-slow) var(--ease-luxury);
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.closeBtn {
+  align-self: flex-end;
+  color: var(--color-sand);
+  padding: 0.4rem;
+  margin-bottom: var(--space-lg);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.navLink {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--color-sand-muted);
+}
+
+.activeLink {
+  color: var(--color-gold);
+}
+
+.ctaBtn {
+  margin-top: var(--space-md);
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-lake-teal-deep);
+  background: var(--color-gold);
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-sm);
+}

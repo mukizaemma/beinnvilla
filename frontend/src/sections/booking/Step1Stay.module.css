@@ -1,0 +1,203 @@
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.title {
+  font-size: var(--fs-h3);
+  color: var(--color-lake-teal);
+  margin-bottom: 0.2rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm) var(--space-md);
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.field input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.7rem;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-terracotta);
+}
+
+.nightsPill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-hillside-green);
+  background: rgba(74, 107, 90, 0.12);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: var(--space-md);
+}
+
+.dateError {
+  font-size: 0.78rem;
+  color: #b1442e;
+  margin-bottom: var(--space-md);
+}
+
+.closedNote {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-navy);
+  background: #f4efe6;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.roomList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.roomCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.roomName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.roomDates {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.removeLink {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #b1442e;
+  flex-shrink: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.addRoomBtn,
+.addExperienceBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  flex: 1;
+  justify-content: center;
+  min-width: 10rem;
+}
+
+.addRoomBtn {
+  color: var(--color-lake-teal);
+  border: 1px dashed var(--color-lake-teal);
+}
+
+.addExperienceBtn {
+  color: var(--color-terracotta);
+  border: 1px dashed var(--color-terracotta);
+}
+
+.breakfast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin: 0.85rem 0 0.4rem;
+  padding: 0.85rem 0.9rem;
+  background: #f7f5f1;
+  font-size: 0.92rem;
+  color: var(--color-navy);
+}
+
+.breakfast input {
+  margin-top: 0.2rem;
+}
+
+.breakfast small {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+/* ── Empty cart state ───────────────────────────────────── */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.emptyIcon {
+  color: var(--color-terracotta);
+  margin-bottom: var(--space-sm);
+}
+
+.emptyTitle {
+  font-size: 1.1rem;
+  color: var(--color-charcoal);
+  margin-bottom: 0.4rem;
+}
+
+.emptyText {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  max-width: 26rem;
+  margin-bottom: var(--space-md);
+}
+
+.emptyLink {
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2c1608;
+  background: var(--color-terracotta);
+  padding: 0.75rem 1.3rem;
+  border-radius: var(--radius-sm);
+}

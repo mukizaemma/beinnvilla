@@ -1,0 +1,96 @@
+.bar {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-md);
+  transform: translateX(-50%);
+  z-index: 250; /* above the drawer (--z-drawer: 200), below nothing else */
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+
+  background: var(--color-lake-teal-deep);
+  color: var(--color-sand);
+  border-radius: 999px;
+  padding: 0.6rem 0.75rem 0.6rem 1.1rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+
+  max-width: calc(100vw - 2 * var(--space-md));
+}
+
+.summaryToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: inherit;
+  background: none;
+}
+
+.toggleIcon {
+  color: var(--color-sand-muted);
+  flex-shrink: 0;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.grandTotal {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.grandTotalLabel {
+  font-size: 0.68rem;
+  color: var(--color-sand-muted);
+}
+
+.pills {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(245, 239, 230, 0.1);
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+}
+
+.continueBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2c1608;
+  background: var(--color-hillside-green);
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  transition: transform var(--transition-base);
+}
+
+.continueBtn:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .bar {
+    left: var(--space-md);
+    right: var(--space-md);
+    transform: none;
+    justify-content: space-between;
+  }
+
+  .grandTotalLabel {
+    display: none;
+  }
+}

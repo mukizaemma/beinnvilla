@@ -1,0 +1,171 @@
+.section {
+  position: relative;
+  min-height: 46vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* background-attachment: fixed isn't supported (or behaves badly) on
+   most mobile browsers — fall back to a normal scrolling background
+   there rather than risk a broken/frozen image. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .section {
+    background-attachment: scroll;
+  }
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 18, 20, 0.5) 0%,
+    rgba(8, 18, 20, 0.62) 100%
+  );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Card — a "faux glass" treatment (gradient + border + sheen)
+   rather than backdrop-filter, on purpose: see the note at the top of
+   HomeCTA.jsx for why. ─────────────────────────────────────────── */
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(245, 239, 230, 0.25);
+  background: linear-gradient(
+    160deg,
+    rgba(245, 239, 230, 0.16) 0%,
+    rgba(245, 239, 230, 0.06) 100%
+  );
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* Decorative diagonal highlight, standing in for the "light catching
+   glass" effect — purely visual, sits behind .cardContent. */
+.cardSheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    transparent 32%,
+    transparent 68%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.headline {
+  font-size: var(--fs-h1);
+  color: var(--color-sand);
+  margin-bottom: var(--space-sm);
+}
+
+.body {
+  font-size: 0.95rem;
+  color: var(--color-sand-muted);
+  line-height: var(--lh-body);
+  max-width: 28rem;
+  margin-inline: auto;
+  margin-bottom: var(--space-lg);
+}
+
+.ctaBtn {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-lake-teal-deep);
+  background: var(--color-gold);
+  padding: 0.95rem 2.2rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(212, 175, 106, 0.35);
+}
+
+.divider {
+  height: 1px;
+  background: rgba(245, 239, 230, 0.18);
+  margin-block: var(--space-lg);
+}
+
+/* ── Location row ───────────────────────────────────────── */
+
+.locationRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.locationItem {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--color-sand-muted);
+}
+
+.locationIcon {
+  color: var(--color-terracotta);
+  flex-shrink: 0;
+}
+
+.directionsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-gold);
+  border-bottom: 1px solid var(--color-gold);
+  padding-bottom: 2px;
+  transition: opacity var(--transition-base);
+}
+
+.directionsLink:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: var(--space-lg) var(--space-md);
+  }
+}

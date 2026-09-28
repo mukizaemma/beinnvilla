@@ -1,0 +1,35 @@
+.strip {
+  background: var(--color-lake-teal-deep);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding-block: var(--space-sm);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--color-sand-muted);
+}
+
+.item svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.label {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+}
+
+.hours {
+  color: var(--color-sand-muted);
+}

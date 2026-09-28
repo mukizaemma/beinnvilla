@@ -1,0 +1,78 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.card {
+  display: flex;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.icon {
+  color: var(--color-terracotta);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.cardTitle {
+  font-size: 0.85rem;
+  color: var(--color-charcoal);
+  margin-bottom: 0.2rem;
+}
+
+.cardText {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.cardLink {
+  font-size: 0.85rem;
+  color: var(--color-lake-teal);
+  font-weight: 600;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-lake-teal);
+  border-bottom: 1px solid var(--color-lake-teal);
+}
+
+.noteBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--color-hillside-green);
+  font-weight: 600;
+}
+
+.noteIcon {
+  flex-shrink: 0;
+}
+
+.responseNote {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.map {
+  margin-top: var(--space-sm);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  border: 0;
+}

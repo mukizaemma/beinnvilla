@@ -1,0 +1,129 @@
+.calendar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--color-ink);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.months {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+}
+
+.month strong {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.nav button {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.nav button:disabled {
+  opacity: 0.35;
+}
+
+.week,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+
+.week {
+  margin-bottom: 0.35rem;
+  color: var(--color-stone);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: #e7e1d8;
+  color: var(--color-ink);
+  font: inherit;
+  font-weight: 650;
+}
+
+.day small {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--color-stone);
+}
+
+.closed {
+  background: transparent;
+  color: #b7aea4;
+}
+
+.cross {
+  text-decoration: line-through;
+}
+
+.inStay {
+  background: rgba(27, 154, 67, 0.28);
+  color: #0d3d1c;
+}
+
+.inStay small {
+  color: #0d3d1c;
+}
+
+.edge {
+  background: var(--color-ember);
+  color: #fff;
+  box-shadow: inset 0 0 0 2px #0d3d1c;
+}
+
+.edge small {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0.8rem 0 0;
+  color: var(--color-stone);
+  font-size: 0.75rem;
+}
+
+.legendClosed {
+  text-decoration: line-through;
+}

@@ -1,0 +1,16 @@
+# ── backend (Payload / Next) ──────────────────────────────────
+backend/node_modules/
+backend/.next/
+backend/.env
+
+# ── frontend (Vite / React) ───────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# keep example env files even though real .env is ignored above
+!backend/.env.example
+!frontend/.env.example
+
+# editor/OS
+.DS_Store
