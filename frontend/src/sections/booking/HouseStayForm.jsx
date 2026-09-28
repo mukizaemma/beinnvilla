@@ -44,6 +44,8 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
   const [channel, setChannel] = useState(initial.channel)
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
+  const [emailAlert, setEmailAlert] = useState('')
+  const emailRef = useRef(null)
   const edited = useRef(false)
 
   useEffect(() => {
@@ -105,6 +107,7 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
     setGuest(blank.guest)
     setChannel(blank.channel)
     setError('')
+    setEmailAlert('')
     setStatus('idle')
     setParams({}, { replace: true })
   }
@@ -113,7 +116,13 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
 
   async function submit(event) {
     event.preventDefault()
-    if (!channel || !fits || !emailOk || blockedFacility) return
+    if (!emailOk) {
+      setEmailAlert('Enter a valid email address.')
+      emailRef.current?.focus()
+      return
+    }
+    setEmailAlert('')
+    if (!channel || !fits || blockedFacility) return
     setStatus('submitting')
     setError('')
     const summary = [
@@ -184,8 +193,8 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
         <h2>We have your stay.</h2>
         <p>
           {channel === 'whatsapp'
-            ? 'Continue on WhatsApp if it opened. You pay at the hotel when you arrive.'
-            : 'A confirmation is on its way to your email. You pay at the hotel when you arrive.'}
+            ? 'Continue on WhatsApp if it opened. A copy is on its way to your email, and the desk has the same request. You pay at the hotel when you arrive.'
+            : 'A confirmation is on its way to your email, and the desk has the same request. You pay at the hotel when you arrive.'}
         </p>
       </div>
     )
@@ -338,14 +347,25 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
             <label className={styles.field}>
               Email
               <input
-                type="email"
+                ref={emailRef}
+                type="text"
+                inputMode="email"
+                autoComplete="email"
                 value={guest.email}
-                onChange={(event) => { touch(); setGuest({ ...guest, email: event.target.value }) }}
-                required
+                aria-invalid={emailAlert ? true : undefined}
+                onChange={(event) => {
+                  touch()
+                  setEmailAlert('')
+                  setGuest({ ...guest, email: event.target.value })
+                }}
               />
             </label>
           </div>
-          {!emailOk && guest.email ? <p className={styles.warn}>Enter a valid email address.</p> : null}
+          {emailAlert ? (
+            <p className={styles.alert} role="alert">
+              {emailAlert}
+            </p>
+          ) : null}
           <label className={styles.field}>
             Notes
             <textarea
@@ -373,8 +393,12 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
               Email
             </button>
           </div>
-          <p className={styles.note}>Same request either way. You pay at the hotel. We confirm on WhatsApp or by email.</p>
-          {error ? <p className={styles.warn}>{error}</p> : null}
+          <p className={styles.note}>Same request either way. You and the desk both get an email. You pay at the hotel.</p>
+          {error ? (
+            <p className={styles.alert} role="alert">
+              {error}
+            </p>
+          ) : null}
           {blockedFacility ? <p className={styles.warn}>{blockedFacility.name} is not free for those dates.</p> : null}
           <div className={styles.actions}>
             <button className={styles.clear} type="button" onClick={clearFields}>
@@ -383,7 +407,7 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
             <button
               className={styles.submit}
               type="submit"
-              disabled={!channel || !fits || !emailOk || Boolean(blockedFacility) || status === 'submitting'}
+              disabled={!channel || !fits || Boolean(blockedFacility) || status === 'submitting'}
             >
               {status === 'submitting'
                 ? 'Sending…'

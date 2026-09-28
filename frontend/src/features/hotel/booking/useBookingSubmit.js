@@ -31,6 +31,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import emailjs from '@emailjs/browser';
 import { CMS_URL } from '@lib/apiClient';
+import { isValidEmail } from '@features/hotel/email';
 import { useSiteLayout } from '@lib/queries/useSiteLayout';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -65,6 +66,12 @@ export function buildSummaryText({ rooms, experiences, stay, nights, guest, tota
  * 'error' on failure — callers decide how to surface that.
  */
 export async function createBookingRequest({ rooms, experiences, stay, guest, details, total }) {
+  if (!isValidEmail(guest?.email)) {
+    const invalid = new Error('Enter a valid email address.');
+    invalid.code = 'invalid-email';
+    throw invalid;
+  }
+
   const payload = {
     rooms: rooms.map((r) => ({
       roomId: r.roomId,

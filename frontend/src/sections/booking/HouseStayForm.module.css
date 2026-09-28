@@ -83,10 +83,18 @@
   font-size: 0.92rem;
 }
 
-.warn {
+.warn,
+.alert {
   margin: 0.7rem 0 0;
   color: #9a3412;
   font-size: 0.9rem;
+}
+
+.alert {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #9a3412;
+  background: #fff1e8;
+  font-weight: 650;
 }
 
 .panel h3 {
