@@ -197,12 +197,37 @@
 
 .facts,
 .band,
+.rooms,
 .brief,
 .offers,
 .stay,
 .visit {
   position: relative;
   background: var(--color-paper);
+}
+
+.rooms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4.5rem var(--container-padding) 0.4rem;
+}
+
+.roomGrid {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 1rem;
+}
+
+.roomGrid > * {
+  height: 100%;
+}
+
+@media (min-width: 800px) {
+  .roomGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .brief {

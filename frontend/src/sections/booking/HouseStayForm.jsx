@@ -175,7 +175,7 @@ export default function HouseStayForm({ anchor = '', showHeading = true }) {
   }
 
   const spaceLine = !capacity
-    ? 'Choose arrival, then departure. Past dates stay hidden. A crossed date is fully booked.'
+    ? 'Choose arrival date, then departure. A crossed date is fully booked.'
     : capacity.closed
       ? 'Those dates are fully booked. Pick another arrival.'
       : people > capacity.guestsLeft

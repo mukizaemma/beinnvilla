@@ -5,11 +5,13 @@ import { Eye, X } from 'lucide-react'
 import { useHomePage } from '@lib/queries/useHomePage'
 import { useSiteLayout } from '@lib/queries/useSiteLayout'
 import { useFacilities } from '@features/hotel/queries/useFacilities'
+import { useRoomsPage } from '@lib/queries/useRoomsPage'
 import { HERO, INN } from '@features/hotel/inn'
 import { useInView } from '@hooks/useInView'
 import PageLoader from '@components/ui/PageLoader'
 import Reveal from '@components/ui/Reveal'
 import HouseStayForm from '@sections/booking/HouseStayForm'
+import RoomOffer from '@components/hotel/RoomOffer'
 import styles from './HomePage.module.css'
 
 function Slideshow({ slides, onIndex }) {
@@ -164,6 +166,7 @@ export default function HomePage() {
   const home = useHomePage()
   const layout = useSiteLayout()
   const facilitiesQuery = useFacilities()
+  const roomsQuery = useRoomsPage()
   const [heroIndex, setHeroIndex] = useState(0)
   const isLoading = home.isLoading || layout.isLoading || facilitiesQuery.isLoading
 
@@ -203,6 +206,7 @@ export default function HomePage() {
   const galleryImages = page.gallery || []
   const lowerImages = page.lower || []
   const enjoyed = (facilitiesQuery.data || []).map((item) => item.name)
+  const previewRooms = (roomsQuery.data?.rooms || []).slice(0, 3)
   const line = HERO.lines[heroIndex % HERO.lines.length]
 
   return (
@@ -236,7 +240,22 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section id="house" className={styles.brief} style={{ zIndex: 3 }}>
+      {previewRooms.length > 0 && (
+        <section id="rooms" className={styles.rooms} style={{ zIndex: 3 }} aria-label="Rooms">
+          <div className={styles.roomGrid}>
+            {previewRooms.map((room, index) => (
+              <Reveal key={room.id} delay={index * 70}>
+                <RoomOffer room={room} index={index} />
+              </Reveal>
+            ))}
+          </div>
+          <Link to="/accommodation" className={`${styles.primary} ${styles.houseAction}`}>
+            View more
+          </Link>
+        </section>
+      )}
+
+      <section id="house" className={styles.brief} style={{ zIndex: 4 }}>
         <article className={styles.houseCard}>
           <Reveal className={styles.houseCopy}>
             <p className={styles.kicker}>The house</p>
@@ -271,12 +290,12 @@ export default function HomePage() {
       </section>
 
       {lowerImages.length > 0 && (
-        <section id="facilities" className={styles.offers} style={{ zIndex: 4 }} aria-label="Photos under the house">
+        <section id="facilities" className={styles.offers} style={{ zIndex: 5 }} aria-label="Photos under the house">
           <GalleryMosaic images={lowerImages} variant="offers" />
         </section>
       )}
 
-      <section id="stay" className={styles.stay} style={{ zIndex: 5 }}>
+      <section id="stay" className={styles.stay} style={{ zIndex: 6 }}>
         <div className={styles.stayLead}>
           <p className={styles.kicker}>Availability</p>
           <h2>See the open nights, then ask for the stay.</h2>
