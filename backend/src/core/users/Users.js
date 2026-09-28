@@ -94,7 +94,7 @@ export const Users = {
     beforeLogin: [
       ({ user }) => {
         if (user?.status === 'inactive') {
-          throw new APIError('This account is inactive.', 401)
+          throw new APIError('This account is waiting for approval. It cannot open the admin pages yet.', 401)
         }
       },
     ],

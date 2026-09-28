@@ -1,4 +1,4 @@
-import { normalizeSocials, SOCIAL_PLATFORMS } from './socials.js'
+import { normalizeOtas, normalizeSocials, OTA_PLATFORMS, SOCIAL_PLATFORMS } from './socials.js'
 import { previewUpload } from '../fields/pageHero.js'
 import { isAdmin } from '../users/access.js'
 
@@ -18,6 +18,7 @@ export const Company = {
       ({ data }) => {
         if (!data) return data
         data.socials = normalizeSocials(data.socials)
+        data.otas = normalizeOtas(data.otas)
         return data
       },
     ],
@@ -25,6 +26,7 @@ export const Company = {
       ({ doc }) => {
         if (!doc) return doc
         doc.socials = normalizeSocials(doc.socials)
+        doc.otas = normalizeOtas(doc.otas)
         return doc
       },
     ],
@@ -101,6 +103,24 @@ export const Company = {
                 admin: {
                   width: '25%',
                   description: 'Shown on the site only if this is a valid http(s) link.',
+                },
+              })),
+            },
+            {
+              name: 'otas',
+              type: 'group',
+              label: 'Booking sites',
+              admin: {
+                description:
+                  'Paste each listing URL. On the website, a filled link opens in a new tab. Leave a field blank to hide it.',
+              },
+              fields: OTA_PLATFORMS.map(({ name, label }) => ({
+                name,
+                type: 'text',
+                label,
+                admin: {
+                  width: '25%',
+                  description: 'Shown only if this is a valid http(s) link. Opens in a new tab.',
                 },
               })),
             },
