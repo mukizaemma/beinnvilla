@@ -220,9 +220,8 @@ export default function HandoverPage() {
                 <span className={`${styles.badge} ${styles.on}`}>For you</span>
               </header>
               <p>
-                Sign in, open Site audit, and fix any check that has failed. Then open the public pages and confirm
-                the wording and photographs. When someone else needs the staff desk, a Super admin sets their Status
-                to Active on Users.
+                Pay the agreed amount. {MAINTAINER} will then set up the annual hosting server, deploy the shared
+                demo to the live server, set up the OTA accounts, and launch the site.
               </p>
             </article>
           </div>
