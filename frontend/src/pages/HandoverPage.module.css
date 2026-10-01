@@ -211,6 +211,12 @@
   word-break: break-all;
 }
 
+.work {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
 .jumps {
   display: flex;
   flex-wrap: wrap;

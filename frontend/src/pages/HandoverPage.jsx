@@ -190,15 +190,42 @@ export default function HandoverPage() {
             </article>
           </div>
           <p className={styles.lead}>
-            This guide is for the people who will run {product} after launch. It was prepared by {MAINTAINER}.
-            One section shows at a time. Use the pills under the title, or Previous and Next. The left and right
-            arrow keys do the same, except while you are typing in a field.
+            {MAINTAINER} has finished the site and put the first content in place. This page is that handover.
           </p>
-          <p>
-            {product} is a house in Kanombe–Busanza. Guests look through the rooms, facilities, and gallery, then
-            send a stay request from Book your Stay or from the form on Home. They choose WhatsApp or email. They
-            pay at the hotel when they arrive. You read those requests and update the site from the staff desk.
-          </p>
+          <div className={styles.work}>
+            <article className={styles.card}>
+              <header>
+                <h3>Development</h3>
+                <span className={`${styles.badge} ${styles.on}`}>Done</span>
+              </header>
+              <p>
+                The public site and the staff desk are built. Guests open Home, Accommodation, Facilities, Gallery,
+                and Visit. They send a stay request from Book your Stay or from Home, by WhatsApp or email, and pay
+                at the hotel. You change the site from the staff desk.
+              </p>
+            </article>
+            <article className={styles.card}>
+              <header>
+                <h3>Content upload</h3>
+                <span className={`${styles.badge} ${styles.on}`}>Done</span>
+              </header>
+              <p>
+                Property details, rooms, facilities, gallery photographs, and the page text are already saved.
+                You are not starting from an empty site.
+              </p>
+            </article>
+            <article className={styles.card}>
+              <header>
+                <h3>Next step</h3>
+                <span className={`${styles.badge} ${styles.on}`}>For you</span>
+              </header>
+              <p>
+                Sign in, open Site audit, and fix any check that has failed. Then open the public pages and confirm
+                the wording and photographs. When someone else needs the staff desk, a Super admin sets their Status
+                to Active on Users.
+              </p>
+            </article>
+          </div>
           <div className={styles.jumps}>
             <button type="button" className={styles.secondary} onClick={() => openPlace({ section: 'access' })}>
               Get operator access
