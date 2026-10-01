@@ -240,32 +240,32 @@ export default function HandoverPage() {
 
         <Section id="access" active={place.section === 'access'} product={product} title="Access">
           <p className={styles.lead}>
-            An operator signs in on the staff desk. The same email also opens the content system once the account is active.
+            User management is in place. It blocks an unauthorized login. Only an authorized user can manage this website’s content.
           </p>
           <div className={styles.callout}>
             <p>
-              Create account saves an Editor with Status Inactive. That person cannot sign in until a Super admin
-              opens Users, presses Edit, sets Status to Active, and presses Save user.
+              Press Create account, then ask {MAINTAINER} to provide admin access. The account cannot sign in until that access is granted.
             </p>
           </div>
           <ol className={styles.steps}>
-            <li>The first Super admin is created at the content system, {`https://cms.beinnvilla.com/admin`}.</li>
-            <li>Everyone after that presses Create account, enters First name, Last name, Email, and Password, then presses Create account.</li>
-            <li>They email that address to {MAINTAINER}, or a Super admin sets Status to Active on Users.</li>
-            <li>They open Login, enter Email and Password, and press Login. Home after sign-in is /staff. That home lists the latest reservations and does not change them.</li>
+            <li>Press Create account. Enter First name, Last name, Email, and Password, then press Create account.</li>
+            <li>Ask {MAINTAINER} to provide admin access. They open Users, press Edit, set the role and Status to Active, and press Save user.</li>
+            <li>Open Login, enter Email and Password, and press Login. The same email also opens the content system once the account is active.</li>
           </ol>
           <p>
             <Link to="/staff/join" className={`${styles.pill} ${styles.primary}`}>Create account</Link>
           </p>
-          <p>
-            Sign in at <Link to="/staff/login">/staff/login</Link>. If you forget the password, press Forgot password?
-            A reset link is emailed. The new password is chosen from that link. This guide does not contain passwords.
-          </p>
           <div className={styles.note}>
             <p>
-              <strong>Roles.</strong> An Editor can open every staff screen except Site setting and Users.
-              An Admin can open those two, and can press Add editor. Only a Super admin can press Add user and choose Admin.
-              An Editor who opens Site setting sees “Only an admin can change site settings.”
+              <strong>Reset password is in place.</strong> On Login, press Forgot password? A reset link is emailed.
+              You choose the new password from that link. This guide does not contain passwords.
+            </p>
+          </div>
+          <div className={styles.note}>
+            <p>
+              <strong>Authorized users only.</strong> An account with Status Inactive cannot sign in.
+              After access is granted, that person can manage the website’s content from the staff desk.
+              Someone without an authorized account cannot.
             </p>
           </div>
         </Section>
