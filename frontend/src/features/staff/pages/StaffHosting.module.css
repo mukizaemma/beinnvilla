@@ -1,0 +1,44 @@
+.cardNote {
+  color: #5c6b7a;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.pending,
+.direct {
+  margin: 0 0 1rem;
+  color: #5c6b7a;
+}
+
+.rate {
+  margin: 0 0 1.25rem;
+  max-width: 28rem;
+}
+
+.rate p {
+  margin: 0.35rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.paid {
+  background: #e5f4ea;
+  color: #1a6b1a;
+}
+
+.expired {
+  background: #fde8e6;
+  color: #b42318;
+}
+
+.active {
+  background: #e7f0ff;
+  color: #0048ff;
+}

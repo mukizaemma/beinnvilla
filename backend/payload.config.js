@@ -31,6 +31,10 @@ import { MenuItems } from './src/modules/hotel/menu/MenuItems.js'
 import { SiteAudit } from './src/core/settings/SiteAudit.js'
 import { UserGuide } from './src/core/settings/UserGuide.js'
 import { HandoverFeedback } from './src/modules/hotel/feedback/HandoverFeedback.js'
+import { HostingInvoices } from './src/modules/hotel/hosting/HostingInvoices.js'
+import { HostingReminders } from './src/modules/hotel/hosting/HostingReminders.js'
+import { HostingProfile } from './src/modules/hotel/hosting/HostingProfile.js'
+import { startHostingSchedule } from './src/modules/hotel/hosting/schedule.js'
 import { withPageNav } from './src/components/payload/PageSwitcher/withPageNav.js'
 import { createEmailAdapter } from './src/core/security/email.js'
 
@@ -69,7 +73,7 @@ export default buildConfig({
       actions: ['./src/components/payload/PageSwitcher/index.jsx#PageSwitcherMenu'],
     },
   },
-  collections: [Users, Media, Rooms, Facilities, GalleryPhotos, Bookings, AvailabilityBlocks, Experiences, Amenities, MenuItems, HandoverFeedback],
+  collections: [Users, Media, Rooms, Facilities, GalleryPhotos, Bookings, AvailabilityBlocks, Experiences, Amenities, MenuItems, HandoverFeedback, HostingInvoices, HostingReminders],
   globals: [
     Company,
     Navigation,
@@ -84,6 +88,7 @@ export default buildConfig({
     withPageNav(PolicyPage),
     SiteAudit,
     UserGuide,
+    HostingProfile,
   ],
   onInit: async (payload) => {
     const uri = mongoUri || ''
@@ -97,6 +102,7 @@ export default buildConfig({
     if (!process.env.RESEND_API_KEY) {
       payload.logger.warn('RESEND_API_KEY is empty. Reservation emails will not be delivered.')
     }
+    startHostingSchedule(payload)
   },
   cors: [frontendUrl, 'http://localhost:3000'].filter(Boolean),
   csrf: [frontendUrl, 'http://localhost:3000'].filter(Boolean),

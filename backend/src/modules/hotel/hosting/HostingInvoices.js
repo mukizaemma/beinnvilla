@@ -1,0 +1,45 @@
+export const HostingInvoices = {
+  slug: 'hosting-invoices',
+  labels: {
+    singular: 'Hosting invoice',
+    plural: 'Hosting invoices',
+  },
+  admin: {
+    hidden: true,
+    useAsTitle: 'number',
+    defaultColumns: ['number', 'periodEnd', 'status', 'total'],
+  },
+  access: {
+    read: ({ req }) => Boolean(req.user),
+    create: () => false,
+    update: () => false,
+    delete: () => false,
+  },
+  fields: [
+    { name: 'number', type: 'text', required: true, unique: true },
+    { name: 'periodStart', type: 'date', required: true },
+    { name: 'periodEnd', type: 'date', required: true },
+    { name: 'issuedOn', type: 'date', required: true },
+    { name: 'serviceLabel', type: 'text' },
+    { name: 'hostingAmount', type: 'number' },
+    { name: 'hostingCurrency', type: 'text' },
+    { name: 'hostingInvoiceAmount', type: 'number' },
+    { name: 'supportAmount', type: 'number' },
+    { name: 'invoiceCurrency', type: 'text' },
+    { name: 'rate', type: 'number' },
+    { name: 'total', type: 'number' },
+    {
+      name: 'status',
+      type: 'select',
+      required: true,
+      defaultValue: 'active',
+      options: [
+        { label: 'Active', value: 'active' },
+        { label: 'Expired', value: 'expired' },
+        { label: 'Paid', value: 'paid' },
+      ],
+    },
+    { name: 'paidOn', type: 'date' },
+    { name: 'preparedBy', type: 'text' },
+  ],
+}

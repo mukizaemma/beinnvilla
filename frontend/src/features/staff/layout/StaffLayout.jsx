@@ -21,6 +21,7 @@ import {
   BookOpen,
   User,
   Users,
+  Receipt,
 } from 'lucide-react'
 import { applyCompanyFavicon, brandFromCompany } from '@features/hotel/companyBrand'
 import { useSiteLayout } from '@lib/queries/useSiteLayout'
@@ -29,6 +30,7 @@ import styles from './StaffLayout.module.css'
 
 const NAV = [
   { to: '/staff/settings', label: 'Site setting', icon: Settings, roles: ['superadmin', 'admin'] },
+  { to: '/staff/hosting', label: 'Hosting', icon: Receipt },
   { to: '/staff/users', label: 'Users', icon: Users, roles: ['superadmin', 'admin'] },
   { to: '/staff/pages?open=home-page', label: 'Home Page', icon: Home },
   { to: '/staff/pages', label: 'Pages', icon: FileText, end: true },

@@ -36,6 +36,8 @@ const StaffAudit        = lazy(() => import('@features/staff/pages/StaffAudit'))
 const StaffGuide        = lazy(() => import('@features/staff/pages/StaffGuide'))
 const StaffAccount      = lazy(() => import('@features/staff/pages/StaffAccount'))
 const StaffUsers        = lazy(() => import('@features/staff/pages/StaffUsers'))
+const StaffHosting      = lazy(() => import('@features/staff/pages/StaffHosting'))
+const StaffInvoicePage  = lazy(() => import('@features/staff/pages/StaffInvoicePage'))
 
 // Wraps a lazy component in Suspense — called inline in route elements
 const Wrap = ({ Component }) => (
@@ -58,6 +60,7 @@ const router = createBrowserRouter([
       { path: 'join', element: <Wrap Component={StaffJoinPage} /> },
       { path: 'forgot', element: <Wrap Component={StaffForgotPage} /> },
       { path: 'reset/:token', element: <Wrap Component={StaffResetPage} /> },
+      { path: 'hosting/invoices/:id', element: <Wrap Component={StaffInvoicePage} /> },
       {
         element: <Wrap Component={StaffLayout} />,
         children: [
@@ -72,6 +75,7 @@ const router = createBrowserRouter([
           { path: 'media', element: <Wrap Component={StaffMedia} /> },
           { path: 'pages', element: <Wrap Component={StaffPages} /> },
           { path: 'settings', element: <Wrap Component={StaffSettings} /> },
+          { path: 'hosting', element: <Wrap Component={StaffHosting} /> },
           { path: 'users', element: <Wrap Component={StaffUsers} /> },
           { path: 'amenities', element: <Wrap Component={StaffAmenities} /> },
           { path: 'facilities', element: <Wrap Component={StaffFacilities} /> },
@@ -106,7 +110,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/handover',
-    element: <Wrap Component={HandoverPage} />,
+    element: (
+      <Suspense fallback={null}>
+        <HandoverPage />
+      </Suspense>
+    ),
   },
   {
     path: '/',

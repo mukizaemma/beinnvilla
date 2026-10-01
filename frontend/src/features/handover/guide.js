@@ -1,145 +1,403 @@
 export const DEVELOPER_EMAIL = 'useadmin@iremetech.com'
+export const MAINTAINER = 'Ireme Tech'
+export const MAINTAINER_URL = 'https://iremetech.com'
+export const PRODUCT = 'BE Inn Villa'
+export const LIVE_URL = 'https://beinnvilla.com'
+export const CMS_URL_PUBLIC = 'https://cms.beinnvilla.com'
 
-export const HANDOVER_TABS = [
-  { id: 'overview', label: 'What is ready' },
-  { id: 'bookings', label: 'How guests book' },
-  { id: 'inbox', label: 'Your bookings' },
-  { id: 'account', label: 'Your account' },
-  { id: 'manual', label: 'How to update the site' },
-  { id: 'upkeep', label: 'Keeping it online' },
-  { id: 'feedback', label: 'Ask a question' },
+export const SECTIONS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'access', label: 'Access' },
+  { id: 'guide', label: 'Operator guide' },
+  { id: 'visitors', label: 'What visitors see' },
+  { id: 'maintenance', label: 'Maintenance' },
+  { id: 'support', label: 'Support' },
 ]
 
-export const HANDOVER_SECTIONS = {
-  overview: {
-    title: 'What is ready',
-    lead: 'The BE Inn Villa website is built. Guests can look around and ask to stay. You can read those requests and update the site after your account is approved.',
-    blocks: [
-      {
-        heading: 'What guests can do',
-        body: 'They can look at the rooms and photos, read about the villa and facilities, and send a stay request from the website. Guests do not create an account and they do not pay online. They pay at the hotel when they arrive.',
-      },
-      {
-        heading: 'What you can do',
-        body: 'After you sign in, you can change room prices and photos, the phone and WhatsApp number, the hotel email, facilities, and the photo gallery. You can also open the list of stay requests at any time.',
-      },
-      {
-        heading: 'What happens when someone books',
-        body: 'The website saves the request, emails you, and emails the guest. If they choose WhatsApp, a message also opens to the WhatsApp number saved in your site settings.',
-      },
-    ],
-  },
-  bookings: {
-    title: 'How a guest asks to stay',
-    lead: 'The guest uses the booking form on the website. You do not need to be at a computer for this to work.',
-    blocks: [
-      {
-        heading: 'What they fill in',
-        steps: [
-          'They choose the arrival date, the departure date, and how many people are coming.',
-          'They type their name, mobile number, and email. The email has to be a real address, or the form will not send.',
-          'They choose WhatsApp or email. That is how they want to reach the hotel.',
-          'They press send. The request is saved straight away.',
-        ],
-      },
-      {
-        heading: 'They pay later',
-        body: 'The website does not take a card payment. The note they receive says the stay is requested and payment is at the hotel.',
-      },
-    ],
-  },
-  inbox: {
-    title: 'How a booking reaches you',
-    lead: 'You are notified when a request comes in, and you can also open the full list whenever you want.',
-    blocks: [
-      {
-        heading: 'You get an email',
-        body: 'The website emails the guest and emails the hotel at the same time. The hotel copy goes to the email address saved under Site setting. A copy also goes to the desk inbox arranged with Ireme Tech.',
-      },
-      {
-        heading: 'WhatsApp or email, their choice',
-        body: 'If the guest chooses WhatsApp, their phone opens a message to the WhatsApp number you saved in Site setting. If they choose email, the same request is sent by email. Either way, you still receive the email notification.',
-      },
-      {
-        heading: 'Those contacts come from your settings',
-        body: 'Open Site setting and fill in the hotel email, phone, and WhatsApp number. Those are the contacts the guest writes to. If they are empty, the guest cannot be sent to the right person.',
-      },
-      {
-        heading: 'See recent bookings any time',
-        steps: [
-          'Sign in to the staff pages.',
-          'Open Bookings.',
-          'The newest requests are listed there, with the guest’s name, dates, and contact details.',
-          'Open one request when you want to reply on WhatsApp or by email.',
-        ],
-      },
-    ],
-  },
-  account: {
-    title: 'Create your admin account',
-    lead: 'Use the button below to register. Then tell Ireme Tech which email you used. That account cannot open the admin pages until it is approved.',
-    blocks: [
-      {
-        heading: 'What to do',
-        steps: [
-          'Press Create your admin account and enter your name, email, and a password you will remember.',
-          'Send that same email address to Ireme Tech. We use it to turn the account on.',
-          'Until a super admin approves it, signing in will not work. A new registration cannot manage the hotel by itself.',
-          'After approval, open the staff pages and sign in with that email and password.',
-        ],
-      },
-      {
-        heading: 'If you forget the password',
-        body: 'On the sign-in page, press Forgot password. A reset link is emailed to you. The password is never written on this page.',
-      },
-    ],
-  },
-  manual: {
-    title: 'How to update the site',
-    lead: 'After your account is approved, these are the only places you usually need. You do not need to know how the website was built.',
-    blocks: [
-      {
-        heading: 'Day to day',
-        steps: [
-          'Site setting — the hotel name, logo, phone, WhatsApp, and email. Booking messages use these.',
-          'Rooms — the price, the cover photo, and extra photos for each room. Size, view, and the other details can be left blank. If you leave bedrooms empty, it is saved as 1.',
-          'Bookings — every stay request. Open one to see who is coming and how to reply.',
-          'Facilities and Gallery — what guests read about the property, and the photos on the gallery page.',
-        ],
-      },
-      {
-        heading: 'Two ways in',
-        body: 'The staff pages are the simple desk for everyday changes. The admin pages show the same information if you prefer that screen. Both use the account that was approved for you.',
-      },
-    ],
-  },
-  upkeep: {
-    title: 'Keeping the website online',
-    lead: 'The pages are finished. Guests can use the live address after the domain, the hosting, and the security certificate are in place.',
-    spotlight: {
-      label: 'Required before the site can go live',
-      items: ['Register the domain name', 'Set up the hosting', 'Add SSL security so the address starts with https'],
-      fee: '$80',
-      feeNote: 'Paid every year to renew the domain, hosting, and SSL.',
+export const AREAS = [
+  {
+    id: 'site-setting',
+    label: 'Site setting',
+    menu: 'Staff desk → Site setting',
+    path: '/staff/settings',
+    limited: 'Admin and Super admin',
+    summary: 'This screen changes the property name, phone, WhatsApp, email, address, map, social links, and booking-site links.',
+    actions: {
+      create: 'This screen edits the one site record. There is no button to create another.',
+      read: 'The form opens with the details already saved.',
+      update: 'Change the fields you need, then press Save settings.',
+      delete: 'There is no delete on this screen. Ask Ireme Tech if this record should be removed.',
     },
-    blocks: [
-      {
-        heading: 'What still has to be set up',
-        body: 'Register the domain name, set up the hosting, and add SSL security so the address starts with https. Until those are in place, the site is not on its public address.',
-      },
-      {
-        heading: 'Once a year',
-        body: 'The domain, hosting, and SSL are renewed every year. That renewal is $80.',
-      },
-      {
-        heading: 'Help after handover',
-        body: 'Ireme Tech remains available to help with the hosting renewal and with any technical problem. Write to the same address you use when you ask for your admin account to be approved.',
-      },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Sign in, then open Site setting. An Editor sees “Only an admin can change site settings.”',
+      'Update Property name, Phone, WhatsApp, Email, the address, and the map. Paste a social or booking-site link only when it should show. Leave a link blank to hide that icon.',
+      'Press Save settings.',
+      'Open the public site. Check the name in the header, then open Visit and check the phone, email, address, and booking-site links.',
     ],
   },
-  feedback: {
-    title: 'Ask a question',
-    lead: 'If something is unclear or you want a change, send a note here. Ireme Tech can read it from the admin pages.',
-    blocks: [],
+  {
+    id: 'hosting',
+    label: 'Hosting',
+    menu: 'Staff desk → Hosting',
+    path: '/staff/hosting',
+    summary: 'This screen records the yearly domain, hosting, and SSL renewal and the invoices for that charge. It stores no panel passwords or server credentials.',
+    actions: {
+      create: 'The next invoice is created when the current period has ended. No invoice is opened until the renewal date is confirmed.',
+      read: 'The page shows each fact that already has a value, then the invoices, newest period first. View / print opens the invoice.',
+      update: 'Registrar, host, domain, and the annual fees stay as already set. Save a rate only when the hosting fee and the invoice use different currencies. Only a Super admin can press Mark paid, and only on an unpaid invoice.',
+      delete: 'There is no delete on this screen. Invoices stay on file. Ask Ireme Tech if a record should be removed.',
+    },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Sign in and open Hosting. Every operator can open this page.',
+      'Read the cards that have a value. The line under the title names anything that still needs to be confirmed.',
+      'When the currencies differ, enter the current rate and press Save rate. Paid invoices stay as they were.',
+      'Press View / print to open the invoice. Print and Download PDF both open the browser print window.',
+      'A Super admin presses Mark paid and confirms. If the total still needs a rate, enter that rate first.',
+    ],
   },
-}
+  {
+    id: 'users',
+    label: 'Users',
+    menu: 'Staff desk → Users',
+    path: '/staff/users',
+    limited: 'Admin and Super admin',
+    summary: 'This screen adds people, changes their role and Status, and removes an account.',
+    actions: {
+      create: 'A Super admin presses Add user. An Admin presses Add editor. The new person is an Editor.',
+      read: 'The table lists Name, Email, Role, and Status.',
+      update: 'Press Edit, change the fields, and press Save user. A Super admin can set Status to Active or Inactive.',
+      delete: 'Press Remove, then confirm. You cannot remove the account you are signed in with.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Users. An Editor sees “Only an admin can manage users.”',
+      'Press Add user if you are a Super admin, or Add editor if you are an Admin. Enter the name, email, and password, then press Save user.',
+      'For someone who used Create account, press Edit, set Status to Active, and press Save user. Until then they cannot sign in.',
+      'Ask that person to open Login and sign in. They should not send you their password.',
+    ],
+  },
+  {
+    id: 'home',
+    label: 'Home Page',
+    menu: 'Staff desk → Home Page',
+    path: '/staff/pages?open=home-page',
+    summary: 'This screen edits the one Home record: the large photographs, the home grid, and the photos under the house card.',
+    actions: {
+      create: 'Home already exists. There is no button to add a second home page.',
+      read: 'The Home editor opens as soon as you choose this menu item.',
+      update: 'Change the photographs or text, then press Save.',
+      delete: 'You can press Remove slide on a single slide. You cannot delete the Home page. Ask Ireme Tech if the page itself should be removed.',
+    },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Open Home Page. The editor title is Edit Home.',
+      'Replace a photograph in the slides, the home grid, or the lower photos. The first grid photo is the tall picture.',
+      'Press Save.',
+      'Open Home and check the large photos, the photo grid, and the photos under the house card. Room names on that page come from Rooms. Facility names come from Facilities.',
+    ],
+  },
+  {
+    id: 'pages',
+    label: 'Pages',
+    menu: 'Staff desk → Pages',
+    path: '/staff/pages',
+    summary: 'This screen edits the fixed list of pages. It does not add a new public address.',
+    actions: {
+      create: 'The list is fixed. There is no button to create a page.',
+      read: 'The table shows each page and its URL. Press Edit to open it.',
+      update: 'Change the header image or the text, then press Save.',
+      delete: 'There is no delete for a page. Ask Ireme Tech if a page should be removed.',
+    },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Open Pages and press Edit on the row you want. The rows are Home, Accommodation, Facilities, Gallery, Visit, Booking, Booking policy, About, and Things to do.',
+      'Change the header image. That photograph is the picture at the top of Accommodation, Gallery, Visit, Book your Stay, and Booking policy.',
+      'Press Save.',
+      'Open the URL from that row. About uses the same address as Visit, and Things to do uses the same address as Facilities. The Visit page itself is filled from Visit and Site setting. The Facilities list is filled from Facilities.',
+    ],
+  },
+  {
+    id: 'rooms',
+    label: 'Rooms',
+    menu: 'Staff desk → Rooms',
+    path: '/staff/accommodation',
+    summary: 'This screen adds a room, changes its price, photos, and description, or removes it from Accommodation.',
+    actions: {
+      create: 'Press Add listing. The window title is Add room.',
+      read: 'The table lists the rooms already saved.',
+      update: 'Press Edit, change the room, and press Save.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Rooms and press Add listing.',
+      'Enter the name, the nightly price, a short description, and a cover photo. Add more photos if you want them on the room page. Press Save.',
+      'To change one later, press Edit, then Save. To take it off the site, press Delete and confirm.',
+      'Open Accommodation and check the room. Open the room itself from View details.',
+    ],
+  },
+  {
+    id: 'facilities',
+    label: 'Facilities',
+    menu: 'Staff desk → Facilities',
+    path: '/staff/facilities',
+    summary: 'This screen adds a facility guests can request, such as the sauna or the meeting space, and removes one.',
+    actions: {
+      create: 'Press Add facility.',
+      read: 'The table lists each facility.',
+      update: 'Press Edit, change the facility, and press Save.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Facilities and press Add facility.',
+      'Enter the name and description. Under Who can use it, choose Held with a stay or Also open to visitors. Add photos. The first photo is the cover. Press Save.',
+      'Use Edit to change one, or Delete to remove it.',
+      'Open Facilities on the public site, then open that facility. The short line on the list is the start of the description. The facility page shows the full text.',
+    ],
+  },
+  {
+    id: 'bookings',
+    label: 'Bookings',
+    menu: 'Staff desk → Bookings',
+    path: '/staff/reservations',
+    summary: 'This screen lists stay requests guests send from the website. You confirm, reply, or remove a request. You do not create one here.',
+    actions: {
+      create: 'A guest sends the request from Book your Stay or the form on Home. There is no add button on this screen.',
+      read: 'Filter the table, press Search, then press the view button on a row.',
+      update: 'Change Status to Pending, Confirmed, or Cancelled. You can also reply or add an internal note.',
+      delete: 'Press Delete and confirm. The button is also inside the reservation window.',
+    },
+    available: { create: false, read: true, update: true, delete: true },
+    steps: [
+      'Open Bookings. The heading is Website reservations.',
+      'Choose Confirmed via, Status, From date, and To date, then press Search. Press the view button on a row to read the guest, dates, and facilities.',
+      'Set Status to Pending, Confirmed, or Cancelled. Press Reply on WhatsApp or Reply by Email. Use Add internal note when the note is only for the desk.',
+      'The guest already has the request on their email. Payment is at the hotel. Open Book your Stay only to see the form they used.',
+    ],
+  },
+  {
+    id: 'availability',
+    label: 'Availability',
+    menu: 'Staff desk → Availability',
+    path: '/staff/availability',
+    summary: 'This screen closes nights when the house cannot take more guests, and opens them again.',
+    actions: {
+      create: 'Press Close dates and save the range.',
+      read: 'The table lists closed ranges, the date guests can book from, and the status.',
+      update: 'Press Open again to let the website take those dates. There is no separate edit form.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Availability and press Close dates.',
+      'Choose The whole property or Only some rooms. Set First full night and Guests can book from.',
+      'Save. The row shows Closed. Press Open again when the house can take guests, or Delete to remove the range.',
+      'Open Home or Book your Stay. A crossed date on the calendar is full.',
+    ],
+  },
+  {
+    id: 'kitchen',
+    label: 'Kitchen & bar',
+    menu: 'Staff desk → Kitchen & bar',
+    path: '/staff/pages?open=bar-restaurant-page',
+    summary: 'This screen edits the one Facilities page record, including the header photograph guests see on Facilities.',
+    actions: {
+      create: 'The page already exists. There is no button to create another.',
+      read: 'The editor opens when you choose Kitchen & bar. In Pages, the same record is the Facilities row.',
+      update: 'Change the header image or the text, then press Save.',
+      delete: 'There is no delete on this screen. Ask Ireme Tech if this page should be removed.',
+    },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Open Kitchen & bar. You are editing the Facilities page record.',
+      'Replace the header image. Dishes and drinks are not edited here. The screen says to use Menu items for those.',
+      'Press Save.',
+      'Open Facilities and check the photograph at the top. The facility cards themselves come from Facilities in the staff menu.',
+    ],
+  },
+  {
+    id: 'menu',
+    label: 'Menu items',
+    menu: 'Staff desk → Menu items',
+    path: '/staff/menu',
+    summary: 'This screen adds a dish or drink, changes its price and category, or deletes it.',
+    actions: {
+      create: 'Press Add menu item.',
+      read: 'The table lists the items already saved.',
+      update: 'Press Edit, change the item, and press Save.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Menu items and press Add menu item.',
+      'Enter the name, price, and category, then press Save. Categories are Starter, Main, Drink, Dessert, and Breakfast.',
+      'Use Edit to change one, or Delete to remove it.',
+      'The public Facilities page lists facilities, not this dish list. The item is saved here for the kitchen and bar record.',
+    ],
+  },
+  {
+    id: 'things-to-do',
+    label: 'Things to do',
+    menu: 'Staff desk → Things to do',
+    path: '/staff/things-to-do',
+    summary: 'This screen adds an activity, changes it, or deletes it. The public address /things-to-do opens Facilities.',
+    actions: {
+      create: 'Press Add activity. The address is created from the name.',
+      read: 'The table lists the activities already saved.',
+      update: 'Press Edit, change the activity, and press Save.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Things to do and press Add activity.',
+      'Enter the name, description, and photo, then press Save.',
+      'Use Edit to change one, or Delete to remove it.',
+      'Guests who open /things-to-do land on Facilities. Check Facilities for what they see. The activity itself stays on this screen.',
+    ],
+  },
+  {
+    id: 'amenities',
+    label: 'Amenities',
+    menu: 'Staff desk → Amenities',
+    path: '/staff/amenities',
+    summary: 'This screen adds an amenity record, changes it, or deletes it.',
+    actions: {
+      create: 'Press Add amenity. The name creates the address.',
+      read: 'The table lists the name and icon.',
+      update: 'Press Edit, change the amenity, and press Save.',
+      delete: 'Press Delete and confirm.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Amenities and press Add amenity.',
+      'Enter the name and press Save.',
+      'Use Edit to change one, or Delete to remove it.',
+      'Guests do not have a separate amenities page. Extras that appear on a room are added on that room, under Rooms.',
+    ],
+  },
+  {
+    id: 'gallery',
+    label: 'Site Gallery',
+    menu: 'Staff desk → Site Gallery',
+    path: '/staff/gallery',
+    summary: 'This screen chooses which photos appear on the Gallery page, their order, and their category.',
+    actions: {
+      create: 'Press Add images, or press From library to use a photo already uploaded.',
+      read: 'The screen lists photos that are on the website gallery. The heading is Website gallery.',
+      update: 'Change Category, or press Up and Down to change the order.',
+      delete: 'Press Remove to take a photo off the Gallery page. The file stays in Media Gallery.',
+    },
+    available: { create: true, read: true, update: true, delete: true },
+    steps: [
+      'Open Site Gallery.',
+      'Press Add images and upload, or press From library and choose a photo already in Media Gallery.',
+      'Set Category, and use Up or Down if the order matters. Press Remove to hide a photo from the website.',
+      'Open Gallery and check the photos. The latest apartment photos also appear on Home.',
+    ],
+  },
+  {
+    id: 'media',
+    label: 'Media Gallery',
+    menu: 'Staff desk → Media Gallery',
+    path: '/staff/media',
+    summary: 'This screen uploads photographs into the library other screens can use.',
+    actions: {
+      create: 'Press Choose images, then Upload.',
+      read: 'Uploaded images are listed below the upload box. The heading is Media gallery.',
+      update: 'There is no edit button after a file is uploaded.',
+      delete: 'There is no delete on this screen. Ask Ireme Tech to remove a file.',
+    },
+    available: { create: true, read: true, update: false, delete: false },
+    steps: [
+      'Open Media Gallery and press Choose images.',
+      'Tick Also show on the website Gallery page only if the photo should appear on Gallery. Otherwise leave it as library only.',
+      'Press Upload. Files over 700KB are resized before they save, and you see that preview first.',
+      'If you ticked the gallery option, open Gallery and check the photo. If not, choose the file later from a photo field on Rooms, Facilities, or Pages.',
+    ],
+  },
+  {
+    id: 'audit',
+    label: 'Site audit',
+    menu: 'Staff desk → Site audit',
+    path: '/staff/audit',
+    summary: 'This screen shows a live score for company details, rooms, facilities, gallery photos, and page content. It does not save a record.',
+    actions: {
+      create: 'There is nothing to create on this screen.',
+      read: 'The score, the grade, and the checks are shown as soon as the page loads.',
+      update: 'You cannot edit the score here. Open the staff screen named in a failed check and save the missing detail there.',
+      delete: 'There is no delete on this screen.',
+    },
+    available: { create: false, read: true, update: false, delete: false },
+    steps: [
+      'Open Site audit and read the score.',
+      'Select a group if you want to narrow the list.',
+      'When a check has failed, open the staff screen it points to and fill the missing detail.',
+      'Return to Site audit and confirm the score has changed. Guests do not see this screen.',
+    ],
+  },
+  {
+    id: 'user-guide',
+    label: 'User Guide',
+    menu: 'Staff desk → User Guide',
+    path: '/staff/guide',
+    summary: 'This menu item opens this handover document. It does not create or edit a record.',
+    actions: {
+      create: 'There is no record to create on this screen.',
+      read: 'Choosing User Guide opens /handover, which is this guide.',
+      update: 'There is nothing to save on this screen.',
+      delete: 'There is no delete on this screen.',
+    },
+    available: { create: false, read: true, update: false, delete: false },
+    steps: [
+      'In the staff desk, open User Guide.',
+      'The address changes to /handover.',
+      'Use the pills and Previous or Next to move through the sections.',
+      'Guests do not see this page in the public menu.',
+    ],
+  },
+  {
+    id: 'account',
+    label: 'My account',
+    menu: 'Staff desk → My account',
+    path: '/staff/account',
+    summary: 'This screen updates the name, email, and password of the person who is signed in.',
+    actions: {
+      create: 'This screen edits your own account. There is no button to create another person. Use Users for that.',
+      read: 'First name, Last name, and Email are filled from the account you used to sign in.',
+      update: 'Change the fields and press Save account. Leave New password blank to keep the current password.',
+      delete: 'There is no delete on this screen. Ask Ireme Tech if the account should be removed. You also cannot remove your own row on Users.',
+    },
+    available: { create: false, read: true, update: true, delete: false },
+    steps: [
+      'Open My account.',
+      'Change First name, Last name, or Email if they are wrong.',
+      'Type a new password only when you want to replace the current one, then press Save account.',
+      'Sign out and sign in again if you changed the email or the password. This screen does not change the public site.',
+    ],
+  },
+]
+
+export const VISITOR_ROWS = [
+  { screen: 'Home', path: '/', edited: 'Home Page, Rooms, Facilities, Site setting' },
+  { screen: 'Accommodation', path: '/accommodation', edited: 'Pages → Accommodation, Rooms' },
+  { screen: 'Room', path: '/accommodation/…', edited: 'Rooms' },
+  { screen: 'Facilities', path: '/facilities', edited: 'Facilities, Kitchen & bar' },
+  { screen: 'Facility', path: '/facilities/…', edited: 'Facilities' },
+  { screen: 'Gallery', path: '/gallery', edited: 'Pages → Gallery, Site Gallery' },
+  { screen: 'Visit', path: '/visit', edited: 'Pages → Visit, Site setting' },
+  { screen: 'Book your Stay', path: '/book', edited: 'Pages → Booking. The guest sends the request.' },
+  { screen: 'Booking policy', path: '/policy', edited: 'Pages → Booking policy (header image)' },
+]
+
+export const MAINTENANCE_FACTS = [
+  { label: 'Website', value: LIVE_URL },
+  { label: 'Content system', value: CMS_URL_PUBLIC },
+  { label: 'Email delivery', value: 'Resend' },
+  { label: 'Messages sent as', value: `BE Inn Villa <info@beinnvilla.com>` },
+  { label: 'Stay alerts', value: 'The Email saved in Site setting, and useadmin@iremetech.com' },
+  { label: 'Database', value: 'MongoDB Atlas, database name beinnvilla' },
+  { label: 'Website payment', value: 'Not in use. Guests pay at the hotel.' },
+]

@@ -1,0 +1,111 @@
+.hostingInvoice {
+  min-height: 100vh;
+  background: #f3f1ec;
+  padding: 28px 16px 48px;
+  font-family: 'Times New Roman', Times, serif;
+  color: #1c2430;
+}
+
+.hostingInvoiceBar {
+  width: min(820px, 100%);
+  margin: 0 auto 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.hostingInvoiceBar a,
+.hostingInvoiceBar button {
+  font-family: Inter, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid #0048ff;
+  background: #fff;
+  color: #0033cc;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.hostingSheet {
+  width: min(820px, 100%);
+  margin: 0 auto;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 12px 32px rgba(28, 36, 48, 0.08);
+}
+
+.hostingSheet header strong {
+  display: block;
+  font-size: 22px;
+}
+
+.hostingSheet header p,
+.hostingSheet > p,
+.hostingSheet section p,
+.hostingSheet footer p {
+  margin: 0.2rem 0;
+}
+
+.hostingSheet h1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 28px 0 18px;
+}
+
+.hostingSheet a {
+  color: #0033cc;
+}
+
+.hostingNote {
+  margin: 16px 0;
+}
+
+.hostingSheet table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 22px;
+}
+
+.hostingSheet th,
+.hostingSheet td {
+  border: 1px solid #1c2430;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.hostingTotal th,
+.hostingTotal td {
+  font-weight: 700;
+}
+
+.hostingSheet h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+@media print {
+  .hostingInvoiceBar {
+    display: none !important;
+  }
+
+  .hostingInvoice {
+    background: #fff;
+    padding: 0;
+  }
+
+  .hostingSheet {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 16mm;
+}
